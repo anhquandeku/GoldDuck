@@ -1,0 +1,64 @@
+﻿@inherits LayoutComponentBase
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <!--<NavLink class="nav-link" href="login">Login</NavLink>-->
+            <a href="login">Login</a>
+            <a href="register">Register</a>
+        </div>
+
+        <article class="content">
+            @Body
+        </article>
+        <footer style="background-color: #1C2331; width: 100%;">
+
+            <!-- Footer Links -->
+            <div class="end" style="margin-left: 10%;">
+                <ul>
+                    <li> <a href="camera">CAMERA </a></li>
+                    <li> <a href="videocam">VIDEO CAM</a></li>
+                    <li> <a href="accessories">ACCESSORIES</a></li>
+                    <li> <a href="guarantee">GUARANTEE </a> </li>
+                    <li> <a href="contact">CONTACT </a> </li>
+                </ul>
+            </div>
+            <div class="end">
+                <ul>
+                    <h6> Đồng Sáng Lập</h6>
+                    <li><a target="_blank" href="https://www.facebook.com/Cute2610">Trần Thị Thu Thanh</a></li>
+                    <li><a target="_blank" href="https://www.facebook.com/anh.quan.deku/">Phan Anh Quân</a></li>
+                    <li><a target="_blank" href="https://www.facebook.com/thanhthang.itsgu">Phan Thanh Thắng</a></li>
+                    <li><a target="_blank" href="https://www.facebook.com/nguyenphuhongloan">Nguyễn Phú Hồng Loan</a></li>
+                </ul>
+            </div>
+            <div class="end">
+                <h6> Liên Hệ </h6>
+                <h8>
+                    <i class="fa fa-home mr-3"></i> 273 An Dương Vương, Quận 5, TP. Hồ Chí Minh
+                </h8><br>
+                <h8>
+                    <i class="fa fa-envelope mr-3"></i> goldduckcamera@gmail.com
+                </h8><br>
+                <h8>
+                    <i class="fa fa-phone mr-3"></i> + 01 234 567 88
+                </h8><br>
+                <h8>
+                    <i class="fa fa-print mr-3"></i> + 01 234 567 89
+                </h8><br>
+            </div>
+            <div class="copyright">
+                <a href="" class="f-left-1">© 2022 Copyright: goldduckcamera.com</a>
+                <a target="_blank" href="https://www.facebook.com/Cute2610" class="f-left-2" style="margin-left: 2% ;"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                <a target="_blank" href="https://www.instagram.com/thanh_tranthithu/" class="f-left-2"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                <a target="_blank" href="#" class="f-left-2"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                <a target="_blank" href="https://www.youtube.com/channel/UC9sbR6aLg0ftGiC41ILVIlQ?view_as=subscriber" class="f-left-2"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+            </div>
+
+        </footer>
+    </main>
+</div>

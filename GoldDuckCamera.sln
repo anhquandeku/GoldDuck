@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32516.85
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldDuckCamera.Server", "GoldDuckCamera\Server\GoldDuckCamera.Server.csproj", "{6E91E2BF-F299-4B8A-92E6-F2D0047E8A3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldDuckCamera.Client", "GoldDuckCamera\Client\GoldDuckCamera.Client.csproj", "{02D3C5C1-2CFD-4850-A814-DA7DD88D5C4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldDuckCamera.Shared", "GoldDuckCamera\Shared\GoldDuckCamera.Shared.csproj", "{1CBDDB88-B839-4454-9C12-8C7DA366445B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E91E2BF-F299-4B8A-92E6-F2D0047E8A3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E91E2BF-F299-4B8A-92E6-F2D0047E8A3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E91E2BF-F299-4B8A-92E6-F2D0047E8A3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E91E2BF-F299-4B8A-92E6-F2D0047E8A3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02D3C5C1-2CFD-4850-A814-DA7DD88D5C4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02D3C5C1-2CFD-4850-A814-DA7DD88D5C4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02D3C5C1-2CFD-4850-A814-DA7DD88D5C4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02D3C5C1-2CFD-4850-A814-DA7DD88D5C4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CBDDB88-B839-4454-9C12-8C7DA366445B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CBDDB88-B839-4454-9C12-8C7DA366445B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CBDDB88-B839-4454-9C12-8C7DA366445B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CBDDB88-B839-4454-9C12-8C7DA366445B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {22568AD0-CDFA-49B8-A47E-B7EDA35EC1D3}
+	EndGlobalSection
+EndGlobal
