@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldDuckCamera.Server", "GoldDuckCamera\Server\GoldDuckCamera.Server.csproj", "{6E91E2BF-F299-4B8A-92E6-F2D0047E8A3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoldDuckCamera.Server", "GoldDuckCamera\Server\GoldDuckCamera.Server.csproj", "{6E91E2BF-F299-4B8A-92E6-F2D0047E8A3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldDuckCamera.Client", "GoldDuckCamera\Client\GoldDuckCamera.Client.csproj", "{02D3C5C1-2CFD-4850-A814-DA7DD88D5C4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoldDuckCamera.Client", "GoldDuckCamera\Client\GoldDuckCamera.Client.csproj", "{02D3C5C1-2CFD-4850-A814-DA7DD88D5C4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldDuckCamera.Shared", "GoldDuckCamera\Shared\GoldDuckCamera.Shared.csproj", "{1CBDDB88-B839-4454-9C12-8C7DA366445B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoldDuckCamera.Shared", "GoldDuckCamera\Shared\GoldDuckCamera.Shared.csproj", "{1CBDDB88-B839-4454-9C12-8C7DA366445B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

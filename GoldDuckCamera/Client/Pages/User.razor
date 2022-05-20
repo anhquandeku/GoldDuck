@@ -1,0 +1,46 @@
+﻿@page "/user"
+
+@inject HttpClient _httpClient
+
+<h1>User</h1>
+<div>
+    <a href="/adduser"> Create New User</a>
+    @if (userList != null)
+    {
+        <table class="table-bordered">
+            <thead>
+                <tr>
+                    <th width = "30%">User Name</th>
+                    <th width = "20%">Password</th>
+                    <th width = "20%">Full Name</th>
+                    <th width = "30%">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in userList)
+                {
+                    <tr>
+                        <td>
+                            @p.username
+                        </td>
+                    <td>@p.password</td>
+                    <td>@p.fullname</td>
+                    <td>
+                        <a href="/edituser/@p.username">Edit</a> |
+                        <a href="/deleteuser/@p.username">Delete</a>
+                    </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+@code {
+    List<UserViewModel> userList = new List<UserViewModel>();
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await _httpClient.GetAsync("api/user");
+        response.EnsureSuccessStatusCode();
+        userList = await response.Content.ReadFromJsonAsync<List<UserViewModel>>();
+    }
+}
