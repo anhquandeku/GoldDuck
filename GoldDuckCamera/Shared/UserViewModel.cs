@@ -10,7 +10,7 @@ namespace GoldDuckCamera.Shared
     public class UserViewModel
     {
 
-        [Required]
+        [Key]
         [Display(Name = "User Name")]
         public string username { get; set; }
 

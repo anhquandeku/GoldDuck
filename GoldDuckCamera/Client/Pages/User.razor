@@ -10,10 +10,11 @@
         <table class="table-bordered">
             <thead>
                 <tr>
-                    <th width = "30%">User Name</th>
-                    <th width = "20%">Password</th>
-                    <th width = "20%">Full Name</th>
-                    <th width = "30%">Action</th>
+                    <th>User Name</th>
+                    <th>Password</th>
+                    <th>Full Name</th>
+                    <th>Date</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,18 +24,21 @@
                         <td>
                             @p.username
                         </td>
-                    <td>@p.password</td>
-                    <td>@p.fullname</td>
-                    <td>
-                        <a href="/edituser/@p.username">Edit</a> |
-                        <a href="/deleteuser/@p.username">Delete</a>
-                    </td>
+                        <td>@p.password</td>
+                        <td>@p.fullname</td>
+                        <td>@p.date</td>
+                        <td>
+                            <a href="/edituser/@p.username">Edit</a> |
+                            <a href="/deleteuser/@p.username">Delete</a>
+                        </td>
                     </tr>
                 }
             </tbody>
         </table>
     }
 </div>
+<br />
+<br />
 @code {
     List<UserViewModel> userList = new List<UserViewModel>();
     protected override async Task OnInitializedAsync()

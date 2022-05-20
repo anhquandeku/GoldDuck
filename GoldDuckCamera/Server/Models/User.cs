@@ -6,7 +6,7 @@ namespace GoldDuckCamera.Server.Models
     [Table("user", Schema = "dbo")]
     public class User
     {
-        [Required]
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string username { get; set; }
 
@@ -17,7 +17,7 @@ namespace GoldDuckCamera.Server.Models
         public string fullname { get; set; }
 
         [Required]
-        public string date { get; set; }
+        public DateTime date { get; set; }
 
         [Required]
         public string gender { get; set; }
