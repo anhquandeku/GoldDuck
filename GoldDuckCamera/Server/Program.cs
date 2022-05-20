@@ -1,4 +1,8 @@
-using Microsoft.AspNetCore.ResponseCompression;
+using GoldDuckCamera.Server.AppDbContext;
+using GoldDuckCamera.Server.Models;
+using GoldDuckCamera.Server.Repository;
+using GoldDuckCamera.Server.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +10,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
+// For entity Framework
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+// For DI registration
+builder.Services.AddTransient<IUserRepository<User>, UserRepository>();
+builder.Services.AddTransient<IUserService, UserService>();
 
 var app = builder.Build();
 
