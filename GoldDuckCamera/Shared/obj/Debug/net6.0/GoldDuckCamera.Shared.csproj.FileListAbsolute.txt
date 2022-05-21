@@ -12,3 +12,17 @@ C:\GoldDuckCamera\GoldDuckCamera\Shared\obj\Debug\net6.0\GoldDuckCamera.Shared.p
 C:\GoldDuckCamera\GoldDuckCamera\Shared\obj\Debug\net6.0\ref\GoldDuckCamera.Shared.dll
 C:\GoldDuckCamera\GoldDuckCamera\Shared\bin\Debug\net6.0\GoldDuckCamera.Shared.runtimeconfig.json
 C:\GoldDuckCamera\GoldDuckCamera\Shared\obj\Debug\net6.0\GoldDuckCamera.Shared.genruntimeconfig.cache
+D:\TMDT\GoldDuckCamera\Shared\bin\Debug\net6.0\GoldDuckCamera.Shared.deps.json
+D:\TMDT\GoldDuckCamera\Shared\bin\Debug\net6.0\GoldDuckCamera.Shared.runtimeconfig.json
+D:\TMDT\GoldDuckCamera\Shared\bin\Debug\net6.0\GoldDuckCamera.Shared.dll
+D:\TMDT\GoldDuckCamera\Shared\bin\Debug\net6.0\GoldDuckCamera.Shared.pdb
+D:\TMDT\GoldDuckCamera\Shared\obj\Debug\net6.0\GoldDuckCamera.Shared.csproj.AssemblyReference.cache
+D:\TMDT\GoldDuckCamera\Shared\obj\Debug\net6.0\GoldDuckCamera.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\TMDT\GoldDuckCamera\Shared\obj\Debug\net6.0\GoldDuckCamera.Shared.AssemblyInfoInputs.cache
+D:\TMDT\GoldDuckCamera\Shared\obj\Debug\net6.0\GoldDuckCamera.Shared.AssemblyInfo.cs
+D:\TMDT\GoldDuckCamera\Shared\obj\Debug\net6.0\GoldDuckCamera.Shared.csproj.CoreCompileInputs.cache
+D:\TMDT\GoldDuckCamera\Shared\obj\Debug\net6.0\GoldDuckCamera.Shared.dll
+D:\TMDT\GoldDuckCamera\Shared\obj\Debug\net6.0\refint\GoldDuckCamera.Shared.dll
+D:\TMDT\GoldDuckCamera\Shared\obj\Debug\net6.0\GoldDuckCamera.Shared.pdb
+D:\TMDT\GoldDuckCamera\Shared\obj\Debug\net6.0\GoldDuckCamera.Shared.genruntimeconfig.cache
+D:\TMDT\GoldDuckCamera\Shared\obj\Debug\net6.0\ref\GoldDuckCamera.Shared.dll
