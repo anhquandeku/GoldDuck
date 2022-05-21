@@ -463,11 +463,6 @@ h4{
 
 .product{
 	border:rgba(3, 2, 2, 0.4) solid 2px;
-	float:left;
-	margin-top:10px;
-	margin-bottom:10px;
-	margin-left:20px;
-	margin-right: 10px;
 	position: relative;
 	transition: 0.5s;
 }
@@ -513,20 +508,6 @@ h4{
 .product-action-icon li button:hover{
 	background-color: rgb(255, 255, 255);
 	color: rgb(58, 53, 53);
-}
-
-.product > img {
-	opacity: 1;
-	width: 270px;
-	height: 270px;
-    margin:  10px 10px 10px 10px;
-}
-
-.product .img{
-	width: 80%;
-	height: 100%;
-	margin-left: 10%;
-	margin-top:10%;
 }
 
 
