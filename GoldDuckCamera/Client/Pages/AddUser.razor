@@ -2,40 +2,55 @@
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JsRuntime
-<h2>Add Person</h2>
+<h2>Add User</h2>
 <div class="row">
-        <div class="col-md-6">
-                <div class="form-group">
-                        <label for="FirstName"> First Name *</label>
-                        <input form="FirstName" class="form-control" @bind="@person.FirstName" />
-                    </div>
-            </div>
-        <div class="col-md-6">
-                <div class="form-group">
-                        <label for="LastName"> Last Name *</label>
-                        <input form="LastName" class="form-control" @bind="@person.LastName" />
-                    </div>
-            </div>
-        <div class="col-md-6">
-                <div class="form-group">
-                        <label for="Email"> Email *</label>
-                        <input form="Email" class="form-control" @bind="@person.Email" />
-                    </div>
-            </div>
-        <div class="col-md-6">
-                <div class="form-group">
-                        <label for="MobileNo"> Mobile No *</label>
-                        <input form="mobileNo" class="form-control" @bind="@person.MobileNo" />
-                    </div>
-            </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="username"> User Name</label>
+            <input form="username" class="form-control" @bind="@user.username" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="fullname"> FullName</label>
+            <input form="fullname" class="form-control" @bind="@user.fullname" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="date">Ngày sinh:</label>
+        <input type="date" form="date" class="form-control" @bind="@user.date">
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="gender">Gender</label>
+            <select form="gender" class="form-control" @bind="@user.gender">
+                <option value=null>Chọn</option>
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+                <option value="Khác">Khác</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="address"> Address</label>
+            <input form="address" class="form-control" @bind="@user.address" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="phone"> Phone</label>
+            <input form="phone" class="form-control" @bind="@user.phone" />
+        </div>
+    </div>
 </div>
 <div class="row">
-        <div class="col-md-4">
-                <div class="form-group">
-                        <input type="button" class="btn btn-primary" @onclick="@Save" value="Save" />
-                        <input type="button" class="btn" @onclick="@Cancel" value="Cancel" />
-                    </div>
-            </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="button" class="btn btn-primary" @onclick="@Save" value="Save" />
+            <input type="button" class="btn" @onclick="@Cancel" value="Cancel" />
+        </div>
+    </div>
 </div>
 @code {
     UserViewModel user = new UserViewModel();
@@ -44,16 +59,23 @@
     }
     protected async Task Save()
     {
-        var response = await Http.PostAsJsonAsync("api/Person", @person);
-        PersonViewModel personResponse = await response.Content.ReadFromJsonAsync<PersonViewModel>();
-            if (personResponse?.Id > 0)
-            {
-                await JsRuntime.InvokeVoidAsync("alert", "Saved Successfully!");
-                NavigationManager.NavigateTo("personlist");
-            }
-        }
-        void Cancel()
+        user.idPermission = 1;
+        user.password = "123456";
+        user.status = 1;
+        var response = await Http.PostAsJsonAsync("api/user", @user);
+        UserViewModel userResponse = await response.Content.ReadFromJsonAsync<UserViewModel>();
+        if (userResponse?.username != null)
         {
-            NavigationManager.NavigateTo("personlist");
+            await JsRuntime.InvokeVoidAsync("alert", "Saved Successfully!");
+            NavigationManager.NavigateTo("user");
+        }
+        else
+        {
+            await JsRuntime.InvokeVoidAsync("alert", @user.status);
         }
     }
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("user");
+    }
+}

@@ -15,6 +15,6 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\GoldDuckCamera\GoldDuckCamera\Server
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/GoldDuckCamera/GoldDuckCamera/Server/Pages/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+[C:/GoldDuckCamera/GoldDuckCamera/Server/Models/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = TW9kZWxzXFBhZ2VzXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
