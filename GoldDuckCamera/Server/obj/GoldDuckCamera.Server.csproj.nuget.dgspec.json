@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\GoldDuckCamera\\GoldDuckCamera\\Server\\GoldDuckCamera.Server.csproj": {}
+    "C:\\Users\\trant\\source\\repos\\GoldDuckCamera\\GoldDuckCamera\\Server\\GoldDuckCamera.Server.csproj": {}
   },
   "projects": {
-    "C:\\GoldDuckCamera\\GoldDuckCamera\\Client\\GoldDuckCamera.Client.csproj": {
+    "C:\\Users\\trant\\source\\repos\\GoldDuckCamera\\GoldDuckCamera\\Client\\GoldDuckCamera.Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\GoldDuckCamera\\GoldDuckCamera\\Client\\GoldDuckCamera.Client.csproj",
+        "projectUniqueName": "C:\\Users\\trant\\source\\repos\\GoldDuckCamera\\GoldDuckCamera\\Client\\GoldDuckCamera.Client.csproj",
         "projectName": "GoldDuckCamera.Client",
-        "projectPath": "C:\\GoldDuckCamera\\GoldDuckCamera\\Client\\GoldDuckCamera.Client.csproj",
-        "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-        "outputPath": "C:\\GoldDuckCamera\\GoldDuckCamera\\Client\\obj\\",
+        "projectPath": "C:\\Users\\trant\\source\\repos\\GoldDuckCamera\\GoldDuckCamera\\Client\\GoldDuckCamera.Client.csproj",
+        "packagesPath": "C:\\Users\\trant\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\trant\\source\\repos\\GoldDuckCamera\\GoldDuckCamera\\Client\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\trant\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -32,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\GoldDuckCamera\\GoldDuckCamera\\Shared\\GoldDuckCamera.Shared.csproj": {
-                "projectPath": "C:\\GoldDuckCamera\\GoldDuckCamera\\Shared\\GoldDuckCamera.Shared.csproj"
+              "C:\\Users\\trant\\source\\repos\\GoldDuckCamera\\GoldDuckCamera\\Shared\\GoldDuckCamera.Shared.csproj": {
+                "projectPath": "C:\\Users\\trant\\source\\repos\\GoldDuckCamera\\GoldDuckCamera\\Shared\\GoldDuckCamera.Shared.csproj"
               }
             }
           }
@@ -76,6 +72,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
+              "version": "[6.0.5, 6.0.5]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
@@ -90,21 +92,17 @@
         }
       }
     },
-    "C:\\GoldDuckCamera\\GoldDuckCamera\\Server\\GoldDuckCamera.Server.csproj": {
+    "C:\\Users\\trant\\source\\repos\\GoldDuckCamera\\GoldDuckCamera\\Server\\GoldDuckCamera.Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\GoldDuckCamera\\GoldDuckCamera\\Server\\GoldDuckCamera.Server.csproj",
+        "projectUniqueName": "C:\\Users\\trant\\source\\repos\\GoldDuckCamera\\GoldDuckCamera\\Server\\GoldDuckCamera.Server.csproj",
         "projectName": "GoldDuckCamera.Server",
-        "projectPath": "C:\\GoldDuckCamera\\GoldDuckCamera\\Server\\GoldDuckCamera.Server.csproj",
-        "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-        "outputPath": "C:\\GoldDuckCamera\\GoldDuckCamera\\Server\\obj\\",
+        "projectPath": "C:\\Users\\trant\\source\\repos\\GoldDuckCamera\\GoldDuckCamera\\Server\\GoldDuckCamera.Server.csproj",
+        "packagesPath": "C:\\Users\\trant\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\trant\\source\\repos\\GoldDuckCamera\\GoldDuckCamera\\Server\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\trant\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -118,11 +116,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\GoldDuckCamera\\GoldDuckCamera\\Client\\GoldDuckCamera.Client.csproj": {
-                "projectPath": "C:\\GoldDuckCamera\\GoldDuckCamera\\Client\\GoldDuckCamera.Client.csproj"
+              "C:\\Users\\trant\\source\\repos\\GoldDuckCamera\\GoldDuckCamera\\Client\\GoldDuckCamera.Client.csproj": {
+                "projectPath": "C:\\Users\\trant\\source\\repos\\GoldDuckCamera\\GoldDuckCamera\\Client\\GoldDuckCamera.Client.csproj"
               },
-              "C:\\GoldDuckCamera\\GoldDuckCamera\\Shared\\GoldDuckCamera.Shared.csproj": {
-                "projectPath": "C:\\GoldDuckCamera\\GoldDuckCamera\\Shared\\GoldDuckCamera.Shared.csproj"
+              "C:\\Users\\trant\\source\\repos\\GoldDuckCamera\\GoldDuckCamera\\Shared\\GoldDuckCamera.Shared.csproj": {
+                "projectPath": "C:\\Users\\trant\\source\\repos\\GoldDuckCamera\\GoldDuckCamera\\Shared\\GoldDuckCamera.Shared.csproj"
               }
             }
           }
@@ -188,21 +186,17 @@
         }
       }
     },
-    "C:\\GoldDuckCamera\\GoldDuckCamera\\Shared\\GoldDuckCamera.Shared.csproj": {
+    "C:\\Users\\trant\\source\\repos\\GoldDuckCamera\\GoldDuckCamera\\Shared\\GoldDuckCamera.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\GoldDuckCamera\\GoldDuckCamera\\Shared\\GoldDuckCamera.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\trant\\source\\repos\\GoldDuckCamera\\GoldDuckCamera\\Shared\\GoldDuckCamera.Shared.csproj",
         "projectName": "GoldDuckCamera.Shared",
-        "projectPath": "C:\\GoldDuckCamera\\GoldDuckCamera\\Shared\\GoldDuckCamera.Shared.csproj",
-        "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-        "outputPath": "C:\\GoldDuckCamera\\GoldDuckCamera\\Shared\\obj\\",
+        "projectPath": "C:\\Users\\trant\\source\\repos\\GoldDuckCamera\\GoldDuckCamera\\Shared\\GoldDuckCamera.Shared.csproj",
+        "packagesPath": "C:\\Users\\trant\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\trant\\source\\repos\\GoldDuckCamera\\GoldDuckCamera\\Shared\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\trant\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

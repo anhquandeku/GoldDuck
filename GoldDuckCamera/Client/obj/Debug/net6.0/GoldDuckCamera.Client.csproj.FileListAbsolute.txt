@@ -878,3 +878,12 @@ C:\GoldDuckCamera\GoldDuckCamera\Client\obj\Debug\net6.0\build-gz\EGbLUJa7.gz
 C:\GoldDuckCamera\GoldDuckCamera\Client\obj\Debug\net6.0\build-gz\XXrZJKCh.gz
 C:\GoldDuckCamera\GoldDuckCamera\Client\obj\Debug\net6.0\build-gz\f5L+MUBk.gz
 C:\GoldDuckCamera\GoldDuckCamera\Client\obj\Debug\net6.0\build-gz\mmIawluA.gz
+C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Client\obj\Debug\net6.0\GoldDuckCamera.Client.csproj.AssemblyReference.cache
+C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Client\obj\Debug\net6.0\GoldDuckCamera.Client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Client\obj\Debug\net6.0\GoldDuckCamera.Client.AssemblyInfoInputs.cache
+C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Client\obj\Debug\net6.0\GoldDuckCamera.Client.AssemblyInfo.cs
+C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Client\obj\Debug\net6.0\GoldDuckCamera.Client.csproj.CoreCompileInputs.cache
+C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Client\obj\Debug\net6.0\GoldDuckCamera.Client.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Client\obj\Debug\net6.0\GoldDuckCamera.Client.dll
+C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Client\obj\Debug\net6.0\refint\GoldDuckCamera.Client.dll
+C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Client\obj\Debug\net6.0\GoldDuckCamera.Client.pdb

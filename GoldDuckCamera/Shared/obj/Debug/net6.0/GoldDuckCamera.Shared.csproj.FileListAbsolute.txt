@@ -12,3 +12,17 @@ C:\GoldDuckCamera\GoldDuckCamera\Shared\obj\Debug\net6.0\GoldDuckCamera.Shared.p
 C:\GoldDuckCamera\GoldDuckCamera\Shared\obj\Debug\net6.0\ref\GoldDuckCamera.Shared.dll
 C:\GoldDuckCamera\GoldDuckCamera\Shared\bin\Debug\net6.0\GoldDuckCamera.Shared.runtimeconfig.json
 C:\GoldDuckCamera\GoldDuckCamera\Shared\obj\Debug\net6.0\GoldDuckCamera.Shared.genruntimeconfig.cache
+C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Shared\bin\Debug\net6.0\GoldDuckCamera.Shared.deps.json
+C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Shared\bin\Debug\net6.0\GoldDuckCamera.Shared.runtimeconfig.json
+C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Shared\bin\Debug\net6.0\GoldDuckCamera.Shared.dll
+C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Shared\bin\Debug\net6.0\GoldDuckCamera.Shared.pdb
+C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Shared\obj\Debug\net6.0\GoldDuckCamera.Shared.csproj.AssemblyReference.cache
+C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Shared\obj\Debug\net6.0\GoldDuckCamera.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Shared\obj\Debug\net6.0\GoldDuckCamera.Shared.AssemblyInfoInputs.cache
+C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Shared\obj\Debug\net6.0\GoldDuckCamera.Shared.AssemblyInfo.cs
+C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Shared\obj\Debug\net6.0\GoldDuckCamera.Shared.csproj.CoreCompileInputs.cache
+C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Shared\obj\Debug\net6.0\GoldDuckCamera.Shared.dll
+C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Shared\obj\Debug\net6.0\refint\GoldDuckCamera.Shared.dll
+C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Shared\obj\Debug\net6.0\GoldDuckCamera.Shared.pdb
+C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Shared\obj\Debug\net6.0\GoldDuckCamera.Shared.genruntimeconfig.cache
+C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Shared\obj\Debug\net6.0\ref\GoldDuckCamera.Shared.dll
