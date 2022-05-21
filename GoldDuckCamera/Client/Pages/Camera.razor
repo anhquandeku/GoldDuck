@@ -1,9 +1,240 @@
 ﻿@page "/camera"
 
+@inject HttpClient _httpClient
+
 <PageTitle>Camera</PageTitle>
+	
+	<div class="row @Dnone">
+		<img class="col-12" id="pagesh" src="../img-banner/banner-camera.jpg" width="100%">
+		<div class="col-12 mt-10">
+			<div class="row">
+				<h2 class="col-2 " style="font-size: 25px;">Sắp Xếp :</h2>
+				<div class="col-10">
+					<div class="row">
+						<button type="button" class="col-2 profile-rep" onclick="filter_flashsale()">Bán Chạy</button>
+						<button type="button" class="col-2 profile-rep" onclick="filter_new()">Mới Nhất</button>
+						<button type="button" class="col-2 profile-rep" onclick="filter_up()">Giá Tăng Dần</button>
+						<button type="button" class="col-2 profile-rep" onclick="filter_down()">giá Giảm Dần</button>
+						<select id="cameramenu" class="col-2 profile-rep" onchange="Openchild('camera','matheloai',document.getElementById('cameramenu').value,'thuonghieu')">
+							<option value="camera">Thương Hiệu</option>
+							<option value="canon">canon</option>
+							<option value="nikon">nikon</option>
+							<option value="olympus">olympus</option>
+							<option value="panasonic">panasonic</option>
+							<option value="sony">sony</option>
+						</select>
+					</div>
 
-
+				</div>
+			</div>
+			
+		</div>
+		<div class="col-10 offset-1 mt-5">
+			<div class="row"> 
+				<div class="col-4">
+				<div class="row product"> 
+					<img class="col-12 product-img" src="@img[0]" alt="Canon">
+					<div class="col-12 product-info">
+						<p class="text-dark fw-bold">Máy Ảnh Canon IXUS 185 - Đen</p>
+						<p class="text-black">2,500,000 ₫</p>
+					</div>
+					<div class="product-action col-12" @onmouseover="@(e => ProductImg(1,0))" 
+					@onmouseout="@(e => ProductImg(0,0))">
+						<ul class="product-action-icon">
+							<li @onclick="@(e => Detail(0))">
+									<i data-tip="Chi Tiết" class="tooltip fa fa-search"></i>
+								</li>
+							<li onclick="cart_shop('0')">
+								<button href="#" class="tooltip" data-tip="Thêm Vào Giỏ Hàng">
+									<i class="fa fa-shopping-basket" aria-hidden="true"></i>
+								</button>
+							</li>
+							<li onclick="quick_buy('0')">
+								<button href="#" class="tooltip" data-tip="Mua Ngay">
+									<i class="fa fa-shopping-cart"></i>
+								</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+	<div class="@Dnone" id="sotrang">
+		<a href="#" class="sotrang-active" onclick="Onpage(1)">1</a>
+		<a href="#"  onclick="Onpage(2)">2</a>
+		<a href="#"  onclick="Onpage(3)">3</a>
+		<a href="#"  onclick="Onpage(4)">4</a>
+		<a href="#"  onclick="Onpage(5)">5</a>
+	</div>
+	<div id="content-5">
+		<div class="profile-menu" style="margin-top:0px;">
+			<i class="fa fa-home"> </i>
+			<a href="#" class="h3" style=" color:rgb(30, 90, 94)" onclick="trangchinh()"> Trở về</a>
+		</div>
+		<br>
+		<div class="chitietsanpham">
+			<div>
+				<div class="chitiet-container">
+					<div class="chitiet-tensanpham">
+						<h1 class="chitiet-tenitem" itemprop="name">
+							<a href="#" itemprop="url">Máy Ảnh Canon Powershot G7X</a>
+						</h1>
+					</div>
+					<div class="chitiet-sanpham-wrap">
+						<div class="chitiet-left">
+							<div class="chitiet-imageInfo">
+								<div class="chitiet-media">
+									<div class="chitiet-image">
+										<div id="imageZoom" class="chitiet-proImg-big-thumb chitiet-zoomImage is-ready">
+											<img id="imgSelected" src="../img-sanpham/cam-2-1-2.jpg" alt="Máy ảnh">
+										</div>
+									</div>
+									<div class="chitiet-images">
+										<ul>
+											<li onclick="chitiethinh(1,1)">
+												<a href="#"><img src="../img-sanpham/cam-2-1-1.jpg" alt="Máy ảnh"></a>
+											</li>
+											<li onclick="chitiethinh(1,2)">
+												<a href="#"><img src="../img-sanpham/cam-2-1-2.jpg" alt="Máy ảnh"></a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="chitiet-attribute">
+									<div class="chitiet-thongtinsanpham">
+										<table class="chitiet-tableInfo">
+											<tbody>
+												<tr>
+													<td class="chitiet-table-label">Mã sản phẩm</td>
+													<td class="chitiet-table-value">
+														<span itemprop="sku">1001</span>
+														<meta itemprop="mpn">
+													</td>
+												</tr>
+												<tr>
+													<td class="chitiet-table-label">Giá Bán</td>
+													<td class="chitiet-table-value"><del>10,900,000 ₫ VNĐ</del>Tiết kiệm 20%</td>
+												</tr>
+												<tr>
+													<td class="chitiet-table-label">Giá Khuyến Mãi</td>
+													<td class="chitiet-table-value">
+														<span class="chitiet-price_sale">8,720,000 ₫ </span>
+														<i>(Đã có 10% VAT)</i>
+													</td>
+												</tr>
+												<tr>
+													<td class="chitiet-table-label">Thương hiệu</td>
+													<td class="chitiet-table-value" itemprop="brand">canon</td>
+												</tr>
+												<tr>
+													<td class="chitiet-table-label">Màu sắc</td>
+													<td class="chitiet-table-value">
+														<ul class="chitiet-list-color clear">
+															<li>
+																<a href="#" class="selected">
+																<img class="img-color" src="../img-sanpham/cam-2-1-1.jpg" alt="Màu Đen" title="Màu Đen"></a>
+															</li>
+														</ul>
+													</td>
+												</tr>
+												<tr>
+													<td class="chitiet-table-label" style="vertical-align: middle;">Bình chọn</td>
+													<td class="chitiet-table-value">
+														<div itemprop="aggregateRating">
+															<div id="proRate" class="box-vote">
+																<a href="#" title="1 Sao" onclick="">
+																	<i class="fa fa-star" aria-hidden="true"></i>
+																</a>
+																<a href="#" title="2 Sao" onclick="">
+																	<i class="fa fa-star" aria-hidden="true"></i>
+																</a>
+																<a href="#" title="3 Sao" onclick="">
+																	<i class="fa fa-star" aria-hidden="true"></i>
+																</a>
+																<a href="#" title="4 Sao" onclick="">
+																	<i class="fa fa-star" aria-hidden="true"></i>
+																</a>
+																<a href="#" title="5 Sao" onclick="">
+																	<i class="fa fa-star-half-o" aria-hidden="true"></i>
+																</a>
+																<span>4.9/5(31 lượt)</span>
+															</div>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="chitiet-nutnhan">
+										<div class="clear">
+											<div class="chitiet-buy-cart-input">
+												<div class="chitiet-box-qty">
+													<input id="buyQuantity" type="number" class="chitiet-quantity" value="1" step="1" min="1" 
+															max="999" onchange="buyQuaninput(1)">
+													<a class="chitiet-qty-plus" onclick="BuyQuantityUp(1)" href="#">+</a>
+													<a class="chitiet-qty-minus" onclick="BuyQuantityDown()" href="#">-</a>
+												</div>
+											</div>
+										</div>
+										<div class="clear"><a id="btn_buy" class="chitiet-btn-type is--red" 
+											onclick="BuyProduct(1)">Mua Hàng</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 @code {
+	
+	List<UserViewModel> userList = new List<UserViewModel>();
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await _httpClient.GetAsync("api/user");
+        response.EnsureSuccessStatusCode();
+        userList = await response.Content.ReadFromJsonAsync<List<UserViewModel>>();
+    }
+	private Product[]? products;
+	private string[]? img = {"../img-sanpham/cam-1-1-1.jpg"};
+	private string Dnone = "";
+	public class Product
+	{
+		public int ID { get; set; }
+		public string Image1 { get; set; }
+		public string Image2 { get; set; }
+		public int IdCategory { get; set; }
+		public int Price { get; set; }
+		public int Cost { get; set; }
+		public string Name { get; set; }
+		public int IdBrand { get; set; }
+		public DateTime Date { get; set; }
+		public int Count { get; set; }
+		public int Sold { get; set; }
+		public int Sale { get; set; }
+		public int Status { get; set; }
+	}
+
+	public void ProductImg(int position, int index)
+	{
+		if(position == 1)
+		{
+			img[index] = "../img-sanpham/cam-1-1-2.jpg";
+
+		} else
+		{
+			img[index] = "../img-sanpham/cam-1-1-1.jpg";
+		}
+	}
+
+	public void Detail(int index)
+	{
+		Dnone = "d-none";
+	}
 
 }
