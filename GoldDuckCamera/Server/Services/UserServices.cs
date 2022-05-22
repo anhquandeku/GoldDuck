@@ -21,14 +21,13 @@ namespace GoldDuckCamera.Server.Services
 
             if (data != null)
             {
-                data.password = user.password;
                 data.fullname = user.fullname;
                 data.date = user.date;
                 data.gender = user.gender;
                 data.address = user.address;
                 data.phone = user.phone;
-                data.idPermission = user.idPermission;
-                data.status = user.status;
+                //data.idPermission = user.idPermission;
+                //data.status = user.status;
 
                 await _user.UpdateAsync(data);
                 return true;

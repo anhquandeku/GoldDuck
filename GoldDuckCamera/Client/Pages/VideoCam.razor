@@ -1,9 +1,50 @@
 ﻿@page "/videocam"
 
-<PageTitle>Video Cam</PageTitle>
+@inject HttpClient _httpClient
 
-
-
+<h1>User</h1>
+<div>
+    <a href="/adduser"> Create New User</a>
+    @if (productList != null)
+    {
+        <table class="table-bordered">
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Password</th>
+                    <th>Full Name</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in productList)
+                {
+                    <tr>
+                        <td>
+                            @p.name
+                        </td>
+                        <td>@p.guarantee</td>
+                        <td>@p.img1</td>
+                        <td>@p.idCategory</td>
+                        <td>
+                            <a href="/edituser/@p.id">Edit</a> |
+                            <a href="/deleteuser/@p.id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+<br />
+<br />
 @code {
-
+    List<ProductViewModel> productList = new List<ProductViewModel>();
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await _httpClient.GetAsync("api/product");
+        response.EnsureSuccessStatusCode();
+        productList = await response.Content.ReadFromJsonAsync<List<ProductViewModel>>();
+    }
 }

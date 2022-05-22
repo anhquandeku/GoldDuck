@@ -34,13 +34,13 @@ namespace GoldDuckCamera.Server.Controllers
         }
 
         [HttpDelete("{username}")]
-        public async Task<bool> DeletePerson(string username)
+        public async Task<bool> DeleteUser(string username)
         {
             await _userService.DeleteUser(username); return true;
         }
 
         [HttpPut("{username}")]
-        public async Task<bool> UpdatePerson(string username, [FromBody] User Object)
+        public async Task<bool> UpdateUser(string username, [FromBody] User Object)
         {
             await _userService.UpdateUser(username, Object); return true;
         }

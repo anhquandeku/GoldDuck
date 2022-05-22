@@ -1279,3 +1279,6 @@ a {
 .icon-mid:before {
   vertical-align: middle;
 }
+.title{
+    text-align: center;
+}

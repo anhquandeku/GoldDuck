@@ -6,10 +6,44 @@
     </div>
 
     <main>
-        <div class="top-row px-4">
+        <div class="top-row px-4 bg-header">
             <!--<NavLink class="nav-link" href="login">Login</NavLink>-->
-            <a href="login">Login</a>
-            <a href="register">Register</a>
+            <a class="btn btn-warning" href="login">Login</a>
+            <a class="btn btn-warning" href="register">Register</a>
+            <div class="dropdown">
+                    <a href="#" data-bs-toggle="dropdown" aria-expanded="false" class="">
+                        <div class="user-menu d-flex">
+                            <div class="user-name text-end me-3">
+                                <h6 class="mb-0 text-white-600">Trần Thị Thu Thanh</h6>
+                            </div>
+                            <div class="user-img d-flex align-items-center">
+                                <div class="avatar avatar-md">
+                                    <img id="edit" src="../img-icon/avatar-01.jpg">
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton" 
+                            style=" border: 3px solid #04163d; backgroud-color: #dcebfa">
+                        <li>
+                            <a id="open-change-pass-btn" class="dropdown-item btn-outline-dark m-0">
+                                <img src="../img-icon/receipt.png" width="30px"> Đơn mua
+                            </a>
+                        </li>
+                        <li>
+                            <a id="open-update-profile" value="CV001" class="dropdown-item btn-outline-dark m-0">
+                            <img src="../img-icon/user.png" width="30px"> Thông tin cá nhân</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a id="logout" class="dropdown-item m-0" href="#">
+                                <img src="../img-icon/shutdown.png" width="30px">
+                                Đăng Xuất</a>
+                        </li>
+                    </ul>
+                </div>
         </div>
 
         <article class="content">

@@ -1,0 +1,158 @@
+﻿@page "/detail/{id}"
+
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+<!-- chi tiết-->
+<div class="row">
+    <div class="col-12 mt-3">
+        <i class="fa fa-camera"> </i>
+        <a href="/camera" class="h3" style=" color:rgb(30, 90, 94)"> Trở về</a>
+    </div>
+    <br>
+    <div class="chitietsanpham col-12 mt-5">
+        <div class="row">
+            <div class="chitiet-tensanpham col-12">
+                <h1 class="chitiet-tenitem" itemprop="name">
+                    <a href="#" itemprop="url">@product.name</a>
+                </h1>
+            </div>
+            <div class="col-10 offset-1">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="chitiet-image">
+                            <div id="imageZoom" class="chitiet-proImg-big-thumb chitiet-zoomImage is-ready">
+                                <img id="imgSelected" src="../img-sanpham/@image" alt="Máy ảnh">
+                            </div>
+                        </div>
+                        <div class="chitiet-images">
+                            <ul class="chitiet-list-color clear">
+                                <li @onclick="Img1">
+                                    <img class="img-color active" src="../img-sanpham/@product.img1" alt="Máy ảnh" width="50px">
+                                </li>
+                                <li @onclick="Img2">
+                                    <img src="../img-sanpham/@product.img2" alt="Máy ảnh" width="50px">
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="chitiet-thongtinsanpham">
+                            <table class="chitiet-tableInfo">
+                                <tbody>
+                                    <tr>
+                                        <td class="chitiet-table-label">Mã sản phẩm</td>
+                                        <td class="chitiet-table-value">
+                                            <span itemprop="sku">@product.id</span>
+                                            <meta itemprop="mpn">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="chitiet-table-label">Giá Bán</td>
+                                        <td class="chitiet-table-value"><del>@product.price VND</del> Tiết kiệm @product.sale%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="chitiet-table-label">Giá Khuyến Mãi</td>
+                                        <td class="chitiet-table-value">
+                                            <span class="chitiet-price_sale">@(product.price*(1-product.sale/100)) VND </span>
+                                            <i>(Đã có 10% VAT)</i>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="chitiet-table-label">Thương hiệu</td>
+                                        <td class="chitiet-table-value" itemprop="brand">Canon</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="chitiet-table-label">Màu sắc</td>
+                                        <td class="chitiet-table-value">
+                                            <ul class="chitiet-list-color clear">
+                                                <li>
+                                                    <a href="#" class="selected">
+                                                        <img class="img-color" src="../img-sanpham/@product.img1" alt="Màu Đen" title="Màu Đen">
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="chitiet-table-label">Thông số kỹ thuật</td>
+                                        <td class="chitiet-table-value" itemprop="brand">@product.specifications</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="chitiet-table-label text-danger">Bảo hành</td>
+                                        <td class="chitiet-table-value text-danger" itemprop="brand">@product.guarantee năm</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="chitiet-table-label" style="vertical-align: middle;">Bình chọn</td>
+                                        <td class="chitiet-table-value">
+                                            <div itemprop="aggregateRating">
+                                                <div id="proRate" class="box-vote">
+                                                    <a href="#" title="1 Sao" onclick="">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                    <a href="#" title="2 Sao" onclick="">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                    <a href="#" title="3 Sao" onclick="">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                    <a href="#" title="4 Sao" onclick="">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                    <a href="#" title="5 Sao" onclick="">
+                                                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                                    </a>
+                                                    <span>4.9/5(31 lượt)</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="chitiet-nutnhan">
+                            <div class="clear">
+                                <div class="chitiet-buy-cart-input">
+                                    <div class="chitiet-box-qty">
+                                        <input id="buyQuantity" type="number" class="chitiet-quantity" value="1" step="1" min="1"
+                                               max="999" onchange="buyQuaninput(1)">
+                                        <a class="chitiet-qty-plus" onclick="BuyQuantityUp(1)" href="#">+</a>
+                                        <a class="chitiet-qty-minus" onclick="BuyQuantityDown()" href="#">-</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear">
+                                <a id="btn_buy" class="chitiet-btn-type is--red"
+                                   onclick="BuyProduct(1)">Mua Hàng</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public string id { get; set; }
+    string image = "";
+    ProductViewModel product = new ProductViewModel();
+    protected override async Task OnInitializedAsync()
+    {
+        product = await Http.GetFromJsonAsync<ProductViewModel>("api/product/" + id);
+        image = product.img1;
+    }
+
+
+    public void Img1()
+    {
+        image = product.img1;
+    }
+
+    public void Img2()
+    {
+        image = product.img2;
+    }
+}

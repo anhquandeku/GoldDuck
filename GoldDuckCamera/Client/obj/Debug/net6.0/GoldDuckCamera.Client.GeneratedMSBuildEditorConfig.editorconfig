@@ -11,77 +11,109 @@ build_property.EnableTrimAnalyzer = true
 build_property.IncludeAllContentForSelfExtract = 
 build_property.RootNamespace = GoldDuckCamera.Client
 build_property.RootNamespace = GoldDuckCamera.Client
-build_property.ProjectDir = C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Client\
+build_property.ProjectDir = C:\Projects\TMDT_GoldDuck\GoldDuckCamera\Client\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\trant\source\repos\GoldDuckCamera\GoldDuckCamera\Client
+build_property.MSBuildProjectDirectory = C:\Projects\TMDT_GoldDuck\GoldDuckCamera\Client
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/trant/source/repos/GoldDuckCamera/GoldDuckCamera/Client/App.razor]
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/trant/source/repos/GoldDuckCamera/GoldDuckCamera/Client/Pages/Accessories.razor]
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/Pages/Accessories.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjZXNzb3JpZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/trant/source/repos/GoldDuckCamera/GoldDuckCamera/Client/Pages/AddUser.razor]
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/Pages/AddUser.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkVXNlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/trant/source/repos/GoldDuckCamera/GoldDuckCamera/Client/Pages/Camera.razor]
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/Pages/brand/AddBrand.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcYnJhbmRcQWRkQnJhbmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/Pages/brand/EditBrand.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcYnJhbmRcRWRpdEJyYW5kLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/Pages/brand/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcYnJhbmRcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/Pages/Camera.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FtZXJhLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/trant/source/repos/GoldDuckCamera/GoldDuckCamera/Client/Pages/Contact.razor]
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/Pages/CartProduct.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FydFByb2R1Y3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/Pages/Contact.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29udGFjdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/trant/source/repos/GoldDuckCamera/GoldDuckCamera/Client/Pages/Counter.razor]
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/Pages/Counter.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/trant/source/repos/GoldDuckCamera/GoldDuckCamera/Client/Pages/FetchData.razor]
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/Pages/DeleteUser.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGVsZXRlVXNlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/Pages/Detail.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV0YWlsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/Pages/EditUser.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdFVzZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/Pages/FetchData.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/trant/source/repos/GoldDuckCamera/GoldDuckCamera/Client/Pages/Guarantee.razor]
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/Pages/Guarantee.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR3VhcmFudGVlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/trant/source/repos/GoldDuckCamera/GoldDuckCamera/Client/Pages/Index.razor]
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/Pages/History.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSGlzdG9yeS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/trant/source/repos/GoldDuckCamera/GoldDuckCamera/Client/Pages/Login.razor]
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/Pages/Login.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/trant/source/repos/GoldDuckCamera/GoldDuckCamera/Client/Pages/User.razor]
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/Pages/User.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/trant/source/repos/GoldDuckCamera/GoldDuckCamera/Client/Pages/VideoCam.razor]
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/Pages/VideoCam.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmlkZW9DYW0ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/trant/source/repos/GoldDuckCamera/GoldDuckCamera/Client/Shared/SurveyPrompt.razor]
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/Shared/SurveyPrompt.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/trant/source/repos/GoldDuckCamera/GoldDuckCamera/Client/_Imports.razor]
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/trant/source/repos/GoldDuckCamera/GoldDuckCamera/Client/Pages/Register.razor]
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/Pages/Register.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0ZXIucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-ttfg4fxclx
 
-[C:/Users/trant/source/repos/GoldDuckCamera/GoldDuckCamera/Client/Shared/MainLayout.razor]
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-zcq3uyoj0e
 
-[C:/Users/trant/source/repos/GoldDuckCamera/GoldDuckCamera/Client/Shared/NavMenu.razor]
+[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Client/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-5thau5dncs

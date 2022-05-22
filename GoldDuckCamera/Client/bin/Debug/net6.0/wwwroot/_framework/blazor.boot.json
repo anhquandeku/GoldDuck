@@ -210,15 +210,15 @@
       "mscorlib.dll": "sha256-vpgKSsIVVRm3ImOEM6Mg668KUXfSvUY2v2lQxER\/VSw=",
       "netstandard.dll": "sha256-EzmKN+AbNEDjd5nSFsILG121Oz5G6y6srA1Yq1Jo67k=",
       "System.Private.CoreLib.dll": "sha256-cC5\/4QFeEaYp0kJy5xgdDbYrYr8Rflocn4O4\/B\/5l0I=",
-      "GoldDuckCamera.Shared.dll": "sha256-QTtlVIydSCpfIdeEJQsWxZVXhegki+XOHD9Cp87U0c8=",
-      "GoldDuckCamera.Client.dll": "sha256-Zq81QKt3tEgaQIEDeM5agk8lfcc7NMk1\/\/52\/i+4v1I="
+      "GoldDuckCamera.Shared.dll": "sha256-3QN0YFJCAxqRTgCpKs\/wX5KlRNmm1+1Toas3Sg1Z5XY=",
+      "GoldDuckCamera.Client.dll": "sha256-4UpLWsDG0RyDAlesc3uXxqXSJLRkCsi8YHltiB4Fvsc="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
-      "GoldDuckCamera.Shared.pdb": "sha256-ASaU1yQQM\/9CQH39lAevzs2LFR4nrjJE6XWd\/l9wrxo=",
-      "GoldDuckCamera.Client.pdb": "sha256-Ta6EphDjOvhCdirCF3lAr7nofrTSUm0DEbrKVgpm2+A="
+      "GoldDuckCamera.Shared.pdb": "sha256-YgDE88uvITlZ53wQrMGY1hoyZwUdW6v\/rztyRQOwRio=",
+      "GoldDuckCamera.Client.pdb": "sha256-gFXY64eXN71QD5RURHwcZEpaOXS2sDizxMcKAZL3dwA="
     },
     "runtime": {
       "dotnet.6.0.4.dckq00jdfr.js": "sha256-jOfMbaXeCm62yx0cPv3Z19yvcknDcZyUnruATVPdGPE=",

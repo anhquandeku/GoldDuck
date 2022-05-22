@@ -1,0 +1,116 @@
+﻿@page "/cartproduct"
+	<!-- giỏ hàng-->
+	<div class="row mt-3">
+		<h1 class="col-12 font-weight-bold text-success text-center fs-lg-3">
+			Chi tiết đơn hàng
+		</h1>
+		<button class="history col-1 offset-11" onclick="Showhistory()">
+			<i class="fa fa-history" aria-hidden="true"></i>
+		</button>
+		<table class="table col-12">
+			<thead class="table-success">
+				<tr>
+					<th scope="col">Hình ảnh</th>
+					<th scope="col">Tên</th>
+					<th scope="col">Giá</th>
+					<th scope="col">Số lượng</th>
+					<th scope="col">Xóa</th>
+					<th scope="col">Tổng cộng</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><img src="../img-sanpham/cam-7-1-1.jpg" width="100px" /></td>
+					<td>Máy Ảnh Nikon D750</td>
+					<td>28,500,000 ₫</td>
+					<td>
+						<input onclick="downcount(1)" type="button" value="-" />
+						<input onchange="inputcount(1)" value="1" id="count1" type="number"
+							class="" step="1" min="1" max="999" />
+						<input onclick="upcount(1)" type="button" value="+"
+							class="" />
+					</td>
+					<td class="trash"><i class="bi bi-trash"></i></td>
+					<td>57,000,000 ₫</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="col-4 offset-8">
+			<div class="row mt-2">
+				<label class="col-4">Tạm tính:</label>
+				<div class="col-8 text-black" style="text-align:end">
+					67,900,000 ₫
+				</div>
+			</div>
+			<div class="row mt-2">
+				<label class="col-4">Giảm giá:</label>
+				<div class="col-8 text-black" style="text-align:end">
+					19,280,000 ₫
+				</div>
+			</div>
+			<div class="row mt-2">
+				<label class="col-4">Tổng cộng:</label>
+				<div class="col-8 text-black" style="text-align:end">
+					48,620,000 ₫
+				</div>
+			</div>
+			<div class="row mt-2">
+				<label class="col-4 pt-1">Mã giảm giá:</label>
+				<input class="col-5" type="text" placeholder="Nhập mã giảm giá"/>
+				<button class="btn btn-danger col-3" onclick="codesale()">Áp dụng</button>
+			</div>
+			<div class="row" id="voucher"></div>
+		</div>
+		<button class="col-4 offset-8 btn btn-success mt-1" onclick="thanhtoan()">Tiến hành thanh toán</button>
+	</div>
+	<!-- Hóa đơn -->
+	<div class="col-12">
+		<div class="card">
+			<ul id="tomtat" class="list-group list-group-flush">
+				<li class="list-group-item text-white bg-info mb-3">
+					<div class="row">
+						<h6 class="col-2">Địa chỉ</h6>
+						<button class="col-1 offset-9">Sửa</button>
+						<p class="col-12">
+							<strong>Thu Thanh (+84) 703360196</strong> 12/6 XXX, Phường XY,
+							Quận 1, TP. Hồ Chí Minh
+						</p>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<div class="row">
+						<p class="col-7 text-primary">Vietnam Airlines (Người lớn) x1</p>
+						<p class="col-5 text-right">4.941.999&nbsp;₫</p>
+						<p class="col-7 text-primary">Vietnam Airlines (Người lớn) x1</p>
+						<p class="col-5 text-right">4.941.999&nbsp;₫</p>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<div class="row">
+						<p class="col-7">Tạm tính:</p>
+						<p class="col-5 text-right">4.941.999&nbsp;₫</p>
+						<p class="col-7 text-danger font-italic">Khuyến mãi:</p>
+						<p class="col-5 text-right text-danger font-italic">
+							4.941.999&nbsp;₫
+						</p>
+						<p class="col-7">Phí vận chuyển:</p>
+						<p class="col-5 text-right">4.941.999&nbsp;₫</p>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<div class="row">
+						<p class="col-7"><strong>Thành tiền:</strong></p>
+						<p class="col-5 text-right">4.941.999&nbsp;₫</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-12">
+		<button onclick="Payment()" class="col-10 offset-1 btn btn-danger mb-3">
+			<strong>Tiếp tục</strong>
+		</button>
+	</div>
+@code {
+
+}

@@ -24,7 +24,7 @@ namespace GoldDuckCamera.Shared
 
         [Required]
         [Display(Name = "Date")]
-        public string date { get; set; }
+        public DateTime date { get; set; }
 
         [Required]
         [Display(Name = "Gender")]

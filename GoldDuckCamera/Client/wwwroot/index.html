@@ -16,6 +16,9 @@
     <link href="css/app_blazor.css" rel="stylesheet" />
     <link rel="shortcut icon" href="img-icon/iconweb.ico">
     <link rel="stylesheet" href="css/mycss.css">
+    <link rel="stylesheet" href="vendors/toastify/toastify.css">
+    <link rel="stylesheet" href="vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="vendors/bootstrap-icons/bootstrap-icons.css">
     <link href="GoldDuckCamera.Client.styles.css" rel="stylesheet" />
 </head>
 
@@ -28,6 +31,16 @@
         <a class="dismiss">🗙</a>
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
+    <script src="vendors/toastify/toastify.js"></script>
+    <script src="vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="vendors/jquery/jquery.min.js"></script>
+    <script src="vendors/jquery/jquery.validate.js"></script>
+    <script>
+        function ScrollToTop() {
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
 </body>
 
 </html>

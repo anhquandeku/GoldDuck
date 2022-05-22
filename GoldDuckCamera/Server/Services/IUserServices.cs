@@ -4,9 +4,9 @@ namespace GoldDuckCamera.Server.Services
 {
     public interface IUserService
     {
-        Task<User> AddUser(User person);
+        Task<User> AddUser(User user);
 
-        Task<bool> UpdateUser(string username, User person);
+        Task<bool> UpdateUser(string username, User user);
 
         Task<bool> DeleteUser(string username);
 

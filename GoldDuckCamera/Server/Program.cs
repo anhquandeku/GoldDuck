@@ -20,6 +20,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // For DI registration
 builder.Services.AddTransient<IUserRepository<User>, UserRepository>();
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IRepository<Product>, ProductRepository>();
+builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddTransient<IRepository<Brand>, BrandRepository>();
+builder.Services.AddTransient<IBrandService, BrandServices>();
 
 var app = builder.Build();
 

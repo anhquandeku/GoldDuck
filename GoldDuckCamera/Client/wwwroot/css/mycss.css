@@ -33,8 +33,6 @@
 	font-family: futura-pt,-apple-system,blinkmacsystemfont,Segoe UI,roboto,Helvetica Neue,arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
 	font-size: 23px;
 	font-weight: 500;
-	position: absolute;
-	top: 12px;
 }
 
 .logo {
@@ -1244,7 +1242,7 @@ button.tooltip {
 		border-top: 0px;
 	  }
 	  .chitiet-tableInfo .chitiet-table-label {
-		width: 110px;
+		width: 30%;
 		vertical-align: top;
 		padding: 5px 0px;
 		line-height: 20px;
@@ -1594,3 +1592,13 @@ button.tooltip {
   .admin-table td a {
 	margin-bottom: 8px;
   }
+
+.xuongdong {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.bg-header {
+	background-color: #04163d !important;
+}
