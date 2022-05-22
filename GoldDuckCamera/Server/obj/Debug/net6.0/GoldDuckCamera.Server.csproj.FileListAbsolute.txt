@@ -88,3 +88,14 @@ C:\Projects\TMDT_GoldDuck\GoldDuckCamera\Server\obj\Debug\net6.0\refint\GoldDuck
 C:\Projects\TMDT_GoldDuck\GoldDuckCamera\Server\obj\Debug\net6.0\GoldDuckCamera.Server.pdb
 C:\Projects\TMDT_GoldDuck\GoldDuckCamera\Server\obj\Debug\net6.0\GoldDuckCamera.Server.genruntimeconfig.cache
 C:\Projects\TMDT_GoldDuck\GoldDuckCamera\Server\obj\Debug\net6.0\ref\GoldDuckCamera.Server.dll
+C:\Projects\GoldDuckCamera\GoldDuckCamera\Server\obj\Debug\net6.0\GoldDuckCamera.Server.csproj.AssemblyReference.cache
+C:\Projects\GoldDuckCamera\GoldDuckCamera\Server\obj\Debug\net6.0\GoldDuckCamera.Server.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\GoldDuckCamera\GoldDuckCamera\Server\obj\Debug\net6.0\GoldDuckCamera.Server.AssemblyInfoInputs.cache
+C:\Projects\GoldDuckCamera\GoldDuckCamera\Server\obj\Debug\net6.0\GoldDuckCamera.Server.AssemblyInfo.cs
+C:\Projects\GoldDuckCamera\GoldDuckCamera\Server\obj\Debug\net6.0\GoldDuckCamera.Server.csproj.CoreCompileInputs.cache
+C:\Projects\GoldDuckCamera\GoldDuckCamera\Server\obj\Debug\net6.0\GoldDuckCamera.Server.MvcApplicationPartsAssemblyInfo.cache
+C:\Projects\GoldDuckCamera\GoldDuckCamera\Server\obj\Debug\net6.0\GoldDuckCamera.Server.RazorAssemblyInfo.cache
+C:\Projects\GoldDuckCamera\GoldDuckCamera\Server\obj\Debug\net6.0\GoldDuckCamera.Server.RazorAssemblyInfo.cs
+C:\Projects\GoldDuckCamera\GoldDuckCamera\Server\obj\Debug\net6.0\GoldDuckCamera.Server.dll
+C:\Projects\GoldDuckCamera\GoldDuckCamera\Server\obj\Debug\net6.0\refint\GoldDuckCamera.Server.dll
+C:\Projects\GoldDuckCamera\GoldDuckCamera\Server\obj\Debug\net6.0\GoldDuckCamera.Server.pdb

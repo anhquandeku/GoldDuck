@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LKyqe8/01pjcPr6Wdx/FLgYskhNNDoASu3MSIC3Of2VjkvsFFA/bbs0WpaOImmhvW1uBkL3d5YeP4Ze7p/LJ0g==",
+  "dgSpecHash": "GUVSLRoJevuw8G9zEkueLrwBdooZP6BE7S7Df81z7xgr//fQnDuV5C7FfQnVdxWBnRXMpWqqNATCpbPG2ZRvtw==",
   "success": true,
-  "projectFilePath": "C:\\Projects\\TMDT_GoldDuck\\GoldDuckCamera\\Client\\GoldDuckCamera.Client.csproj",
+  "projectFilePath": "C:\\Projects\\GoldDuckCamera\\GoldDuckCamera\\Client\\GoldDuckCamera.Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ACER\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\microsoft.aspnetcore.authorization\\6.0.5\\microsoft.aspnetcore.authorization.6.0.5.nupkg.sha512",

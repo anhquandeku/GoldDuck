@@ -8,13 +8,13 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = GoldDuckCamera.Server
 build_property.RootNamespace = GoldDuckCamera.Server
-build_property.ProjectDir = C:\Projects\TMDT_GoldDuck\GoldDuckCamera\Server\
+build_property.ProjectDir = C:\Projects\GoldDuckCamera\GoldDuckCamera\Server\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Projects\TMDT_GoldDuck\GoldDuckCamera\Server
+build_property.MSBuildProjectDirectory = C:\Projects\GoldDuckCamera\GoldDuckCamera\Server
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Projects/TMDT_GoldDuck/GoldDuckCamera/Server/Pages/Error.cshtml]
+[C:/Projects/GoldDuckCamera/GoldDuckCamera/Server/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

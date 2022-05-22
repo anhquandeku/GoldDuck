@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "croLEzUTuYvMlWx4V0nuPk9XpF0k+CXIvp8bfh9e0NrxAFxPg2Xwm0gfeZTWgptQF6WeX02Zd8tO6+NZHxTDTg==",
+  "dgSpecHash": "TW7u2g46Nql4KFUxlfu/+UXfF98wVXyTg51nT4/lpdp2+3k6XtomGerE1ZhAfpJHY4nTxttQk7iGMAYLwQF92Q==",
   "success": true,
-  "projectFilePath": "C:\\Projects\\TMDT_GoldDuck\\GoldDuckCamera\\Server\\GoldDuckCamera.Server.csproj",
+  "projectFilePath": "C:\\Projects\\GoldDuckCamera\\GoldDuckCamera\\Server\\GoldDuckCamera.Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ACER\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

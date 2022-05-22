@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fUboI0TNtdenZvt5ldAwu7AyJ2JiHKiZXzJcNKR3aieAAX68vcnFozyAs8S4YbXoOHupHa9duKC+dyqYaNWp+A==",
+  "dgSpecHash": "vdzAyw3fUvvtykRk9ujdgKgC01Zz1CGgpxv8SryV9Byqqp5k4L8H9rR6NuArEE7Az2bERxmBiR78Kf5R2T7hTg==",
   "success": true,
-  "projectFilePath": "C:\\Projects\\TMDT_GoldDuck\\GoldDuckCamera\\Shared\\GoldDuckCamera.Shared.csproj",
+  "projectFilePath": "C:\\Projects\\GoldDuckCamera\\GoldDuckCamera\\Shared\\GoldDuckCamera.Shared.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ACER\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
