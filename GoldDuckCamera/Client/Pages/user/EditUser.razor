@@ -1,0 +1,105 @@
+﻿@page "/user/edituser/{username}"
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+@inject HttpClient _httpClient
+@attribute [Authorize(Roles = "admin")]
+<br />
+<br />
+<h2>Edit User</h2>
+<br />
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="fullname"> Full Name *</label>
+            <input form="fullname" class="form-control" @bind="@user.fullname" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="date"> Birthday *</label>
+            <input type="date" form="date" class="form-control" @bind="@user.date" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="fullname"> Gender *</label>
+            <select class="form-control" name="gender" @bind="@user.gender">
+                <option value='Nam'>Nam</option>
+                <option value='Nữ'>Nữ</option>
+                <option value='Khác'>Khác</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="address"> Address *</label>
+            <input form="address" class="form-control" @bind="@user.address" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="phone"> Phone *</label>
+            <input form="phone" class="form-control" @bind="@user.phone" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="idPermission"> Permission *</label>
+            <select class="form-control" name="gender" @bind="@user.idPermission">
+                @foreach (var c in permissionList)
+                {
+                    if (c.status == 1)
+                    {
+                        <option value="@c.id">@c.name</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="button" class="btn btn-primary" @onclick="@Save" value="Save" />
+            <input type="button" class="btn" @onclick="@Cancel" value="Cancel" />
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+@code {
+    [Parameter]
+    public string username { get; set; }
+    UserViewModel user = new UserViewModel();
+    List<PermissionViewModel> permissionList = new List<PermissionViewModel>();
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await _httpClient.GetAsync("api/permission");
+        response.EnsureSuccessStatusCode();
+        permissionList = await response.Content.ReadFromJsonAsync<List<PermissionViewModel>>();
+        user = await Http.GetFromJsonAsync<UserViewModel>("api/user/" + username);
+    }
+    protected async Task Save()
+    {
+        var response = await Http.PutAsJsonAsync("api/user/" + username, @user);
+        bool userResponse = await response.Content.ReadFromJsonAsync<bool>();
+        if (userResponse)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Updated Successfully!");
+            NavigationManager.NavigateTo("user/index");
+        }
+        else
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Updated Fail!");
+        }
+
+    }
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("user/index");
+    }
+
+}

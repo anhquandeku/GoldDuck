@@ -1,0 +1,95 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@inject IJSRuntime JsRuntime
+
+
+<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <div class="header_topbar_content">
+            <pre> GOLD DUCK CAMERA </pre>
+        </div>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"><pre> GOLD DUCK CAMERA </pre></span>
+        </button>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <nav class="flex-column">
+        <div class="nav-item px-4">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> HOME
+            </NavLink>
+        </div>
+        <AuthorizeView Roles="admin">
+            <div class="nav-item px-4">
+                <NavLink class="nav-link" href="user/index">
+                    <span class="oi oi-person" aria-hidden="true"></span> USER
+                </NavLink>
+            </div>
+        </AuthorizeView>
+        <AuthorizeView Roles="customer">
+            <div class="nav-item px-4" id="camera">
+                <NavLink class="nav-link" href="camera">
+                    <span class="oi oi-camera-slr" aria-hidden="true"></span> CAMERA
+                </NavLink>
+            </div>
+            <div class="nav-item px-4">
+                <NavLink class="nav-link" href="videocam">
+                    <span class="oi oi-battery-full" aria-hidden="true"></span> VIDEO CAM
+                </NavLink>
+            </div>
+            <div class="nav-item px-4">
+                <NavLink class="nav-link" href="accessories">
+                    <span class="oi oi-aperture" aria-hidden="true"></span> ACCESSORIES
+                </NavLink>
+            </div>
+        </AuthorizeView>
+        <AuthorizeView Roles="staff, admin">
+            <div class="nav-item px-4">
+                <NavLink class="nav-link" href="product/index">
+                    <span class="oi oi-aperture" aria-hidden="true"></span> PRODUCT
+                </NavLink>
+            </div>
+            <div class="nav-item px-4">
+                <NavLink class="nav-link" href="brand/index">
+                    <span class="oi oi-badge" aria-hidden="true"></span> BRAND
+                </NavLink>
+            </div>
+            <div class="nav-item px-4">
+                <NavLink class="nav-link" href="category/index">
+                    <span class="oi oi-spreadsheet" aria-hidden="true"></span> CATEGORY
+                </NavLink>
+            </div>
+            <div class="nav-item px-4">
+                <NavLink class="nav-link" href="bill/index">
+                    <span class="oi oi-clipboard" aria-hidden="true"></span> BILL
+                </NavLink>
+            </div>
+        </AuthorizeView>
+        <div class="nav-item px-4">
+            <NavLink class="nav-link" href="contact">
+                <span class="oi oi-envelope-closed" aria-hidden="true"></span> CONTACT
+            </NavLink>
+        </div>
+        <div class="nav-item px-4">
+            <NavLink class="nav-link" href="guarantee">
+                <span class="oi oi-wrench" aria-hidden="true"></span> GUARANTEE
+            </NavLink>
+        </div>
+
+    </nav>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    int Ok = 2;
+
+    private async void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+
+
+}

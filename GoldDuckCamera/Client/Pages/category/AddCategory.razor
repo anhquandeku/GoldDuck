@@ -1,0 +1,61 @@
+﻿@page "/category/addcategory"
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+@attribute [Authorize(Roles ="admin, staff")]
+<br />
+<br />
+<h2>Add Category</h2>
+<br />
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="username"> Name *</label>
+            <input form="username" class="form-control" @bind="@category.name" />
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="button" class="btn btn-primary" @onclick="@Save" value="Save" />
+            <input type="button" class="btn" @onclick="@Cancel" value="Cancel" />
+        </div>
+    </div>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+@code {
+    CategoryViewModel category = new CategoryViewModel();
+    protected override async Task OnInitializedAsync()
+    {
+    }
+    protected async Task Save()
+    {
+        category.status = 1;
+        category.id = 0;
+        var response = await Http.PostAsJsonAsync("api/category", @category);
+        CategoryViewModel categoryResponse = await response.Content.ReadFromJsonAsync<CategoryViewModel>();
+        if (categoryResponse.name != null)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Saved Successfully!");
+            Cancel();
+        }
+        else
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Saved Fail!");
+        }
+
+    }
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("category/index");
+    }
+ }

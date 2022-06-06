@@ -1,0 +1,66 @@
+﻿@page "/brand/editbrand/{id}"
+
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+@attribute [Authorize(Roles ="admin, staff")]
+<br />
+<br />
+<h2>Edit Brand</h2>
+<br />
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="username"> Name *</label>
+            <input form="username" class="form-control" @bind="@brand.name" />
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="button" class="btn btn-primary" @onclick="@Save" value="Save" />
+            <input type="button" class="btn" @onclick="@Cancel" value="Cancel" />
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+@code {
+    [Parameter]
+    public String id
+    {
+        get; set;
+    }
+    BrandViewModel brand = new BrandViewModel();
+    protected override async Task OnInitializedAsync()
+    {
+        brand = await Http.GetFromJsonAsync<BrandViewModel>("api/brand/" + id);
+    }
+    protected async Task Save()
+    {
+        var response = await Http.PutAsJsonAsync("api/brand/" + id, @brand);
+        bool BrandResponse = await response.Content.ReadFromJsonAsync<bool>();
+        if (BrandResponse)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Updated Successfully!");
+            NavigationManager.NavigateTo("brand/index");
+        }
+        else
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Updated Fail!");
+        }
+
+    }
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("brand/index");
+    }
+}

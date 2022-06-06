@@ -1,0 +1,96 @@
+﻿@page "/history/detail/{id}"
+
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+@inject HttpClient _httpClient
+@attribute [Authorize(Roles ="customer, admin, staff")]
+<br />
+<br />
+<div class="row mt-2 mb-3">
+    <img class="col-10 offset-1" src="../trangthaidonhang/@img"/>
+    <div class="col-10 offset-1 mt-2">
+        <div class="row mt-3" id="cartContent">
+			<table class="table col-12">
+				<thead class="table-success">
+					<tr>
+						<th scope="col">Hình ảnh</th>
+						<th scope="col">Tên</th>
+						<th scope="col">Số lượng</th>
+					</tr>
+				</thead>
+				<tbody>
+					@for (int i=0; i< billDetail.Count; i++)
+				   {
+					   <tr>
+							<td><img src="../img-sanpham/@productList[i].img1" width="100px" /></td>
+							<td>@productList[i].name</td>
+							<td>
+								@billDetail[i].count
+							</td>
+						</tr>
+				   }
+					
+				</tbody>
+			</table>
+			<div class="col-4">
+				<h5 class="p-0">Địa chỉ nhận hàng:</h5>
+				<div class="row">
+					<label class="col-12">@bill.fullname</label>
+				</div>
+				<div class="row mt-2">
+					<label class="col-12">@bill.address</label>
+				</div>
+			</div>
+			<div class="col-4 offset-4">
+				<div class="row mt-2">
+					<label class="col-4">Tổng hóa đơn:</label>
+					<div class="col-8 text-black" style="text-align:end">
+						@FormatTotal(bill.price)
+					</div>
+				</div>
+			</div>
+		</div>
+
+    </div>
+</div>
+<br/>
+<br/>
+<br />
+@code {
+	[Parameter]
+	public String id
+	{
+		get; set;
+	}
+	string[] imgList = {"xacnhan.png", "danggiao.png", "layhang.png","thanhcong.png"};
+	string img = "";
+
+	List<BillDetailViewModel> billDetail= new List<BillDetailViewModel>();
+	List<ProductViewModel> productList= new List<ProductViewModel>();
+	BillViewModel bill = new BillViewModel();
+	protected override async Task OnInitializedAsync()
+	{
+		bill = await Http.GetFromJsonAsync<BillViewModel>("api/bill/" + id);
+		img = imgList[bill.status - 1];
+		var response = await _httpClient.GetAsync("api/billdetail");
+		response.EnsureSuccessStatusCode();
+		billDetail = await response.Content.ReadFromJsonAsync<List<BillDetailViewModel>>();
+		billDetail = new List<BillDetailViewModel>(billDetail.Where(p => p.idBill.ToString() == id));
+
+		ProductViewModel product = new ProductViewModel();
+		BrandViewModel brand = new BrandViewModel();
+		foreach (var item in billDetail)
+		{
+			product = await Http.GetFromJsonAsync<ProductViewModel>("api/product/" + item.idProduct);
+			productList.Add(product);
+		}
+		await JsRuntime.InvokeVoidAsync("firstCartCount");
+    }
+
+	public string FormatTotal(int a)
+    {
+        return String.Format("{0:n0}", a) + " VND";
+    }
+
+}

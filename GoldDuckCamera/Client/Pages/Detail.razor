@@ -1,0 +1,251 @@
+﻿@page "/detail/{id}"
+
+
+@inject HttpClient _httpClient
+@inject HttpClient Http
+@inject IJSRuntime JsRuntime
+@inject NavigationManager NavigationManager
+@inject Blazored.LocalStorage.ILocalStorageService localStore
+@attribute [Authorize(Roles ="customer")]
+<!-- chi tiết-->
+<div class="row">
+    <div class="col-12 mt-3">
+        <i class="fa fa-camera"> </i>
+        <a href="/camera" class="h3" style=" color:rgb(30, 90, 94)"> Trở về</a>
+    </div>
+    <br>
+    <div class="chitietsanpham col-12 mt-5">
+        <div class="row">
+            <div class="chitiet-tensanpham col-12">
+                <h1 class="chitiet-tenitem" itemprop="name">
+                    <a href="#" itemprop="url">@product.name</a>
+                </h1>
+            </div>
+            <div class="col-10 offset-1">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="chitiet-image">
+                            <div id="imageZoom" class="border border-2 border-secondary chitiet-proImg-big-thumb chitiet-zoomImage is-ready">
+                                <img class="" id="imgSelected" src="../img-sanpham/@image" alt="Máy ảnh">
+                            </div>
+                        </div>
+                        <div class="chitiet-images mb-3">
+                            <ul class="chitiet-list-color">
+                                <a class="@selectedImg1" @onclick="Img1" style="margin-right:3%">
+                                    <li >
+                                        <img src="../img-sanpham/@product.img1" alt="Máy ảnh" width="70px">
+                                    </li>
+                                </a>
+                                <a class="@selectedImg2" @onclick="Img2">
+                                    <li >
+                                    <img src="../img-sanpham/@product.img2" alt="Máy ảnh" width="70px">
+                                    </li>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="chitiet-thongtinsanpham">
+                            <table class="chitiet-tableInfo">
+                                <tbody>
+                                    <tr>
+                                        <td class="chitiet-table-label">Mã sản phẩm</td>
+                                        <td class="chitiet-table-value">
+                                            <span itemprop="sku">@product.id</span>
+                                            <meta itemprop="mpn">
+                                        </td>
+                                    </tr>
+                                    @if(product.sale > 0){
+                                        <tr>
+                                            <td class="chitiet-table-label">Giá Bán</td>
+                                            <td class="chitiet-table-value"><del>@product.price VND</del> Tiết kiệm @product.sale%</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="chitiet-table-label">Giá Khuyến Mãi</td>
+                                            <td class="chitiet-table-value">
+                                                <span class="chitiet-price_sale">@(FormatVND(product.price,product.sale)) </span>
+                                                <i>(Đã có 10% VAT)</i>
+                                            </td>
+                                        </tr>
+                                    } else {
+                                        <tr>
+                                            <td class="chitiet-table-label">Giá Bán</td>
+                                            <td class="chitiet-table-value"><span>@product.price VND</span> 
+                                            <i>(Đã có 10% VAT)</i>
+                                            </td>
+                                        </tr>
+                                    }
+                                    
+                                    <tr>
+                                        <td class="chitiet-table-label">Thương hiệu</td>
+                                        <td class="chitiet-table-value text-capitalize" itemprop="brand">@brand.name</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="chitiet-table-label">Màu sắc</td>
+                                        <td class="chitiet-table-value">
+                                            <ul class="chitiet-list-color clear">
+                                                <li>
+                                                    <a href="#" class="selected">
+                                                        <img class="img-color" src="../img-sanpham/@product.img1" alt="Màu Đen" title="Màu Đen">
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="chitiet-table-label">Thông số kỹ thuật</td>
+                                        <td class="chitiet-table-value" itemprop="brand">@product.specifications</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="chitiet-table-label text-danger">Bảo hành</td>
+                                        <td class="chitiet-table-value text-danger" itemprop="brand">@product.guarantee năm</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="chitiet-table-label" style="vertical-align: middle;">Bình chọn</td>
+                                        <td class="chitiet-table-value">
+                                            <div itemprop="aggregateRating">
+                                                <div id="proRate" class="box-vote">
+                                                    <a href="#" title="1 Sao" onclick="">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                    <a href="#" title="2 Sao" onclick="">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                    <a href="#" title="3 Sao" onclick="">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                    <a href="#" title="4 Sao" onclick="">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                    <a href="#" title="5 Sao" onclick="">
+                                                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                                    </a>
+                                                    <span>4.9/5(31 lượt)</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="chitiet-nutnhan row">
+                            <div class="col-3">
+                                <div class="chitiet-buy-cart-input">
+                                    <div class="chitiet-box-qty">
+                                        <input id="buyQuantity" class="chitiet-quantity" value="@count" disabled>
+                                        <a class="chitiet-qty-plus bg-success" @onclick="BuyQuantityUp">+</a>
+                                        <a class="chitiet-qty-minus bg-success" @onclick="BuyQuantityDown">-</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <a id="btn_buy" class="chitiet-btn-type is--red"
+                                   @onclick="BuyProduct">Mua Hàng</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public string id { get; set; }
+    string image = "";
+    string selectedImg1 = "selected-img";
+    string selectedImg2 = "";
+    int count = 1;
+    ProductViewModel product = new ProductViewModel();
+    BrandViewModel brand = new BrandViewModel();
+    protected override async Task OnInitializedAsync()
+    {
+        product = await Http.GetFromJsonAsync<ProductViewModel>("api/product/" + id);
+        brand = await Http.GetFromJsonAsync<BrandViewModel>("api/brand/" + product.idBrand);
+        image = product.img1;
+        await JsRuntime.InvokeVoidAsync("firstCartCount");
+    }
+
+
+    public void Img1()
+    {
+        image = product.img1;
+        selectedImg2 = "";
+        selectedImg1 = "selected-img";
+    }
+
+    public async void BuyProduct(){
+        await JsRuntime.InvokeVoidAsync("CartCount");
+        string[] cart;
+        int[] idProduct;
+        int[] countList;
+        bool check = false;
+        string noteContent = await localStore.GetItemAsync<string>("Cart");
+        await localStore.RemoveItemAsync("Cart");
+        if (noteContent != null)
+        {
+            cart = noteContent.Split("|");
+            idProduct = new int[cart.Length -1];
+            countList = new int[cart.Length-1];
+            for (int i = 0; i < cart.Length -1; i++)
+            {
+                idProduct[i] = Int32.Parse(cart[i].Split(",")[0]);
+                countList[i] = Int32.Parse(cart[i].Split(",")[1]);
+            }
+            for (var i = 0; i < cart.Length -1; i++)
+            {
+                if (idProduct[i] == Int32.Parse(id))
+                {
+                    countList[i] += count;
+                    check = true;
+                    break;
+                }
+            }
+            if (check == true)
+            {
+                noteContent = "";
+                for (int i=0; i< cart.Length -1; i++)
+                {
+                    noteContent += idProduct[i] + "," + countList[i] + "|";
+                }
+            }
+        }
+        if (check)
+        {
+            await localStore.SetItemAsync("Cart", noteContent);
+
+        }
+        else
+        {
+            string context = noteContent + id + ","+ count +"|"; 
+            await localStore.SetItemAsync("Cart", context);
+        }
+    }
+
+    public void Img2()
+    {
+        image = product.img2;
+        selectedImg1 = "";
+        selectedImg2 = "selected-img";
+    }
+    public string FormatVND(int a, int b)
+    {
+        int value = a*(100-b)/100;
+        return String.Format("{0:n0}", value) + " VND";
+    }
+
+    public void BuyQuantityUp()
+    {
+        count++;
+    }
+
+    public void BuyQuantityDown()
+    {
+        if(count > 1)
+        {
+            count--;
+        }
+    }
+}

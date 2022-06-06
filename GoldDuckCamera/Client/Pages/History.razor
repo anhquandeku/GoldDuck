@@ -1,0 +1,217 @@
+﻿@page "/history"
+@inject HttpClient Http
+@inject HttpClient _httpClient
+@inject IJSRuntime JsRuntime
+@inject Blazored.LocalStorage.ILocalStorageService localStore
+@inject NavigationManager NavigationManager
+@attribute [Authorize(Roles ="customer")]
+
+<div class="card"  style="background-color:lightgray">
+    <div class="card-body" >
+        <ul class="nav nav-tabs row" id="myTab" role="tablist" style="background-color:#e8e1e1;; margin: 0;">
+            <li class="col-2 offset-1 nav-item" role="presentation" style="padding-left:0px;padding-right:0px;">
+                <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#all" role="tab" 
+                aria-controls="home" aria-selected="true" >Tất cả 
+                
+                 </a>
+            </li>
+            <li class="col-2 nav-item" role="presentation" style="padding-left:0px;padding-right:0px;">
+                <a class="nav-link" id="paid-tab" data-bs-toggle="tab" href="#paid" role="tab" 
+                aria-controls="paid" aria-selected="false">Chờ xác nhận
+                    @if(paid > 0)
+                    {
+                        <a style="color:#ee4d2d">(@paid)</a>
+                    }
+                </a>
+            </li>
+            <li class="col-2 nav-item" role="presentation" style="padding-left:0px;padding-right:0px;">
+                <a class="nav-link" id="received-tab" data-bs-toggle="tab" href="#received" role="tab" 
+                aria-controls="received" aria-selected="false">Đang giao
+                @if(received > 0)
+                    {
+                        <a style="color:#ee4d2d">(@paid)</a>
+                    }</a>
+            </li>
+            <li class="col-2 nav-item" role="presentation" style="padding-left:0px;padding-right:0px;">
+                <a class="nav-link" id="rating-tab" data-bs-toggle="tab" href="#rating" role="tab" 
+                aria-controls="rating" aria-selected="false">Đã giao
+                @if(rating > 0)
+                    {
+                        <a style="color:#ee4d2d">(@paid)</a>
+                    }</a>
+            </li>
+        </ul>
+        <div class="tab-content  min-vh-100" id="myTabContent" style="background-color:#f2f7ff;">
+            <div class="tab-pane fade show active row" id="all" role="tabpanel" aria-labelledby="home-tab">
+                @if(all <= 0)
+                {
+                    <img src="./trangthaidonhang/bills.png" class="col-2 offset-5" style="margin-top:15%">
+                    <p class="text-4xl text-black fw-bold text-center">Chưa có đơn hàng</p>
+                } else {
+                    
+                    <div class="row"> 
+                        @if(billList != null)
+                        {
+                            @for (var i = 0; i < billList.Count; i++)
+                            {
+                                Random rnd = new Random();
+                                int number  = rnd.Next(1, 30);
+                                string imgUrl = "../img-sanpham/cam-"+number+"-1-1.jpg";
+                                <div class="col-10 offset-1 row mt-2 bg-white border border-dark">
+					                <div class="col-2"><img src="@imgUrl" width="100px" /></div>
+					                <div class="col-5 mt-4 text-black">@billList[i].fullname + @billList[i].address</div>
+					                <div class="col-3 mt-4 text-danger" style="font-size:13px">@FormatTotal(billList[i].price)</div>
+                                    <div class="col-2 row">
+                                        <p class="text-black text-end mt-1 fs-6">Đang giao</p>
+                                        <a href="history/detail/@billList[i].id" class="btn btn-warning m-3">Chi tiết</a>
+                                    </div>
+					            </div>
+                            }
+                        }
+                    </div>
+                    
+                }
+            </div>
+            <div class="tab-pane fade row" id="paid" role="tabpanel" aria-labelledby="paid-tab">
+                @if(paid <= 0)
+                {
+                        <img src="./trangthaidonhang/bills.png" class="col-2 offset-5" style="margin-top:15%">
+                        <p class="text-4xl text-black fw-bold text-center">Chưa có đơn hàng</p>
+                } else {
+                    
+                    <div class="row"> 
+                        @if(billPaidList != null)
+                        {
+                            @for (var i = 0; i < billPaidList.Count; i++)
+                            {
+                                Random rnd = new Random();
+                                int number  = rnd.Next(1, 30);
+                                string imgUrl = "../img-sanpham/cam-"+number+"-1-1.jpg";
+                                <div class="col-10 offset-1 row mt-2 bg-white border border-dark">
+					                <div class="col-2"><img src="@imgUrl" width="100px" /></div>
+					                <div class="col-5 mt-4 text-black">@billPaidList[i].fullname + @billPaidList[i].address</div>
+					                <div class="col-3 mt-4 text-danger" style="font-size:13px">@FormatTotal(billPaidList[i].price)</div>
+                                    <div class="col-2 row">
+                                        <p class="text-black text-end mt-1 fs-6">Đang giao</p>
+                                        <a href="history/detail/@billPaidList[i].id" class="btn btn-warning m-3">Chi tiết</a>
+                                    </div>
+					            </div>
+                            }
+                        }
+                    </div>
+                    
+                }
+            </div>
+            <div class="tab-pane fade row" id="received" role="tabpanel" aria-labelledby="received-tab">
+                @if(received <= 0)
+                    {
+                        <img src="./trangthaidonhang/bills.png" class="col-2 offset-5" style="margin-top:15%">
+                        <p class="text-4xl text-black fw-bold text-center">Chưa có đơn hàng</p>
+                } else {
+                    
+                    <div class="row"> 
+                        @if(billReceivedList != null)
+                        {
+                            @for (var i = 0; i < billReceivedList.Count; i++)
+                            {
+                                Random rnd = new Random();
+                                int number  = rnd.Next(1, 30);
+                                string imgUrl = "../img-sanpham/cam-"+number+"-1-1.jpg";
+                                <div class="col-10 offset-1 row mt-2 bg-white border border-dark">
+					                <div class="col-2"><img src="@imgUrl" width="100px" /></div>
+					                <div class="col-5 mt-4 text-black">@billReceivedList[i].fullname + @billReceivedList[i].address</div>
+					                <div class="col-3 mt-4 text-danger" style="font-size:13px">@FormatTotal(billReceivedList[i].price)</div>
+                                    <div class="col-2 row">
+                                        <p class="text-black text-end mt-1 fs-6">Đang giao</p>
+                                        <a href="history/detail/@billReceivedList[i].id" class="btn btn-warning m-3">Chi tiết</a>
+                                    </div>
+					            </div>
+                            }
+                        }
+                    </div>
+                    
+                }
+            </div>
+            <div class="tab-pane fade row" id="rating" role="tabpanel" aria-labelledby="rating-tab">
+                @if(rating <= 0)
+                    {
+                        <img src="./trangthaidonhang/bills.png" class="col-2 offset-5" style="margin-top:15%">
+                        <p class="text-4xl text-black fw-bold text-center">Chưa có đơn hàng</p>
+                } else {
+                    
+                    <div class="row"> 
+                        @if(billRatingList != null)
+                        {
+                            @for (var i = 0; i < billRatingList.Count; i++)
+                            {
+                                Random rnd = new Random();
+                                int number  = rnd.Next(1, 30);
+                                string imgUrl = "../img-sanpham/cam-"+number+"-1-1.jpg";
+                                <div class="col-10 offset-1 row mt-2 bg-white border border-dark">
+					                <div class="col-2"><img src="@imgUrl" width="100px" /></div>
+					                <div class="col-5 mt-4 text-black">@billRatingList[i].fullname + @billRatingList[i].address</div>
+					                <div class="col-3 mt-4 text-danger" style="font-size:13px">@FormatTotal(billRatingList[i].price)</div>
+                                    <div class="col-2 row">
+                                        <p class="text-black text-end mt-1 fs-6">Đang giao</p>
+                                        <a href="history/detail/@billRatingList[i].id" class="btn btn-warning m-3">Chi tiết</a>
+                                    </div>
+					            </div>
+                            }
+                        }
+                    </div>
+                    
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    int all = 0;
+    int paid = 0;
+    int received = 0;
+    int rating = 0;
+
+    List<BillViewModel> billList = new List<BillViewModel>();
+    List<BillViewModel> billPaidList = new List<BillViewModel>();
+    List<BillViewModel> billReceivedList = new List<BillViewModel>();
+    List<BillViewModel> billRatingList = new List<BillViewModel>();
+
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await _httpClient.GetAsync("api/bill");
+        response.EnsureSuccessStatusCode();
+        billList = await response.Content.ReadFromJsonAsync<List<BillViewModel>>();
+
+        var authState = await authenticationStateTask;
+        var user = authState.User;
+        billList = new List<BillViewModel>(billList.Where(p => (user.Identity.Name == p.username)));
+        foreach (var item in billList)
+        {
+            if(item.status == 1)
+            {
+                paid++;
+                all++;
+                billPaidList.Add(item);
+            }
+            if(item.status == 2)
+            {
+                received++;
+                all++;
+                billReceivedList.Add(item);
+            }
+            if(item.status == 3)
+            {
+                rating++;
+                all++;
+                billRatingList.Add(item);
+            }
+        }
+    }
+    public string FormatTotal(int a)
+    {
+        return String.Format("{0:n0}", a) + " VND";
+    }
+}

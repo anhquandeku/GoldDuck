@@ -1,0 +1,247 @@
+﻿@page "/bill/index"
+
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+@inject HttpClient _httpClient
+@attribute [Authorize(Roles ="admin, staff")]
+<br />
+<br />
+<div class="title" style="text-align:center;">
+    <h3 style="font-weight: bold;">BILL MANAGEMENT</h3><br />
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group position-relative has-icon-right">
+            <input type="text" class="form-control" placeholder="Search ..." @bind="@search">
+            <button class="btn form-control-icon" style="border:none;" @onclick="@Search">
+                <i class="bi bi-search"></i>
+            </button>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <select class="form-select" @bind="@user">
+            <option value="">Choose user</option>
+            @foreach (var u in userList)
+            {
+                @if (u.status == 1)
+                {
+                    <option value="@u.username">@u.fullname</option>
+                }
+            }
+        </select>
+    </div>
+    <a href="statistic" class="col-sm-1 btn btn-success m-1">
+        Statistic
+    </a>
+</div>
+<br />
+<div class="row">
+    @if (billList1 != null)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>FullName</th>
+                    <th>Date</th>
+                    <th>Address</th>
+                    <th>Price</th>
+                    <th>Username</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in billList1)
+                {
+                    <tr>
+                        <td>@p.id</td>
+                        <td>@p.fullname</td>
+                        <td>@String.Format("{0:dd/MM/yyyy}",p.date)</td>
+                        <td>@p.address</td>
+                        <td>@p.price</td>
+                        <td>@p.username</td>
+                        @if (@p.status == 1)
+                        {
+                            <td>Chưa xác nhận</td>
+                        }
+                        else if (@p.status == 2)
+                        {
+                            <td>Đang giao</td>
+                        }
+                        else
+                        {
+                            <td>Giao thành công</td>
+                        }
+                        <td>
+                            @if (@p.status == 1)
+                            {
+                                <a href="history/detail/@p.id">
+                                    <button type="button" class="btn btn-sm btn-outline-info" style="padding-top: 7px;">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </a>
+                                <button type="button" class="btn btn-sm btn-outline-success" style="padding-top: 7px;" @onclick="@(e => Confirm(p.id.ToString()))">
+                                    <i class="bi bi-check-circle"></i>
+                                </button>
+                            }
+                            else
+                            {
+                                <a href="history/detail/@p.id">
+                                    <button type="button" class="btn btn-sm btn-outline-info" style="padding-top: 7px;">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </a>
+                                <button type="button" class="btn btn-sm btn-outline-success disabled" style="padding-top: 7px;">
+                                    <i class="bi bi-check-circle"></i>
+                                </button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+<br />
+<div class="row">
+    <div class="pagination justify-content-center mb-2">
+        @if (pagenum != 1)
+        {
+            <button class="m-1 page-item btn btn-outline-dark" onclick="@PrePage"><i class="bi bi-caret-left"></i></button>
+        }
+        else
+        {
+            <button class="m-1 page-item btn btn-outline-dark disabled"><i class="bi bi-caret-left"></i></button>
+        }
+        @for (int i = 0; i < @totalPage; i++)
+        {
+            int index = i;
+            <a id="page-@i" class="m-1 page-item btn btn-outline-dark @activeClass[i]"
+           @onclick="@(e => PageCurrent(index+1))" value="@(i+1)">@(i+1)</a>
+        }
+        @if (pagenum != totalPage)
+        {
+            <button class="m-1 page-item btn btn-outline-dark" onclick="@NextPage"><i class="bi bi-caret-right"></i></button>
+        }
+        else
+        {
+            <button class="m-1 page-item btn btn-outline-dark disabled"><i class="bi bi-caret-right"></i></button>
+        }
+    </div>
+</div>
+<br />
+<br />
+@code {
+    int pagenum = 1;
+    int totalPage = 0;
+    string search = "";
+    string user = "";
+    List<BillViewModel> billList = new List<BillViewModel>();
+    List<BillViewModel> billList1 = new List<BillViewModel>();
+    List<string> activeClass = new List<string>();
+    List<UserViewModel> userList = new List<UserViewModel>();
+    public string id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await _httpClient.GetAsync("api/Bill");
+        response.EnsureSuccessStatusCode();
+        billList = await response.Content.ReadFromJsonAsync<List<BillViewModel>>();
+        billList = new List<BillViewModel>(billList.Where(p => p.status != 0));
+
+        var response1 = await _httpClient.GetAsync("api/user");
+        response1.EnsureSuccessStatusCode();
+        userList = await response1.Content.ReadFromJsonAsync<List<UserViewModel>>();
+
+        double total = billList.Count / 10.0;
+        totalPage = (int)Math.Ceiling(total);
+        for (int i = (pagenum - 1) * 10; i < pagenum * 10; i++)
+        {
+            if (i < billList.Count)
+            {
+                billList1.Add(billList[i]);
+            }
+            else break;
+        }
+        for (int i = 0; i < totalPage; i++)
+        {
+            activeClass.Add("");
+        }
+        activeClass[0] = "active";
+    }
+
+    public async void PageCurrent(int index)
+    {
+
+        pagenum = index;
+        billList1.Clear();
+        for (int i = (pagenum - 1) * 10; i < pagenum * 10; i++)
+        {
+            if (i < billList.Count)
+            {
+                billList1.Add(billList[i]);
+            }
+            else break;
+        }
+        for (int i = 0; i < totalPage; i++)
+        {
+            activeClass[i] = "";
+        }
+        activeClass[index - 1] = "active";
+        await JsRuntime.InvokeVoidAsync("ScrollToTop");
+    }
+
+    public async void NextPage()
+    {
+        pagenum += 1;
+        PageCurrent(pagenum);
+    }
+
+    public async void PrePage()
+    {
+        pagenum -= 1;
+
+        PageCurrent(pagenum);
+    }
+
+    public async void Search()
+    {
+        var response = await _httpClient.GetAsync("api/Bill");
+        response.EnsureSuccessStatusCode();
+        billList = await response.Content.ReadFromJsonAsync<List<BillViewModel>>();
+        var lowerCaseSearchTerm = search.Trim().ToLower();
+        if (user != "")
+            billList = new List<BillViewModel>(billList.Where(p => (p.fullname.ToLower().Contains(lowerCaseSearchTerm) && p.username == user && p.status != 0)));
+        else
+            billList = new List<BillViewModel>(billList.Where(p => (p.fullname.ToLower().Contains(lowerCaseSearchTerm) && p.status != 0)));
+        double total = billList.Count / 10.0;
+        totalPage = (int)Math.Ceiling(total);
+        PageCurrent(1);
+    }
+
+    public async Task Confirm(string id)
+    {
+        BillViewModel bill = new BillViewModel();
+        bill = await Http.GetFromJsonAsync<BillViewModel>("api/bill/" + id);
+        bill.status = 2;
+        var response = await Http.PutAsJsonAsync("api/bill/" + id, bill);
+        bool billResponse = await response.Content.ReadFromJsonAsync<bool>();
+        if (billResponse)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Confirm Successfully!");
+            var response1 = await _httpClient.GetAsync("api/bill");
+            response1.EnsureSuccessStatusCode();
+            billList = await response1.Content.ReadFromJsonAsync<List<BillViewModel>>();
+            billList = new List<BillViewModel>(billList.Where(p => p.status != 0));
+            double total = billList.Count / 10.0;
+            totalPage = (int)Math.Ceiling(total);
+            PageCurrent(pagenum);
+        }
+        else
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Confirm Fail!");
+        }
+    }
+}

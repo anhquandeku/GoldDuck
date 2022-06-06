@@ -1,0 +1,27 @@
+﻿@page "/logout"
+
+@using Blazored.LocalStorage
+@using Microsoft.AspNetCore.Authorization
+@using GoldDuckCamera.Client.Services
+
+@inject IJSRuntime JsRuntime
+@inject IAuthService AuthService
+@inject NavigationManager Navigation
+@inject ILocalStorageService localStorage;
+@inject ApiAuthenticationStateProvider api;
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+       var auState = await api.GetAuthenticationStateAsync();
+        if (!auState.User.Identity.IsAuthenticated)
+        {
+             Navigation.NavigateTo("/");
+        }
+        else
+        {
+            AuthService.Logout();
+            Navigation.NavigateTo("/login");
+        }
+    }
+}

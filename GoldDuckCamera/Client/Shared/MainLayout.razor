@@ -1,0 +1,119 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+
+@inject Blazored.LocalStorage.ILocalStorageService localStore
+@inject IJSRuntime JsRuntime
+@inherits LayoutComponentBase
+
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4 bg-header">
+            <AuthorizeView Roles="customer">
+                <a href="cartproduct" id="shop-card" class="m-2 text-white" style="position: relative; display: block;">
+                    <i class="fa fa-shopping-basket mt-2" aria-hidden="true" style="font-size: 26px; "></i>
+                    <span id="cartcount" value="1" class="cart-count d-none"></span>
+                </a>
+            </AuthorizeView>
+            <AuthorizeView>
+                <NotAuthorized>
+                    <a class="btn btn-warning" href="login">Login</a>
+                    <a class="btn btn-warning" href="register">Register</a>
+                </NotAuthorized>
+                <Authorized>
+
+                    <div class="dropdown">
+                        <a href="#" data-bs-toggle="dropdown" aria-expanded="false" class="">
+                            <div class="user-menu d-flex">
+                                <div class="user-name text-end me-2">
+                                    <h6 class="mb-0 text-white-600" style="margin-top:10px !important">@context.User.Identity.Name </h6>
+                                </div>
+                                <div class="user-img d-flex align-items-center">
+                                    <div class="avatar avatar-md">
+                                        <img id="edit" src="../img-icon/avatar-01.jpg" style="margin-bottom:20px !important">
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton"
+                            style=" border: 3px solid #04163d; background-color: #f2f7ff">
+                            <li>
+                                <a href="history" id="open-change-pass-btn" class="dropdown-item btn-outline-dark m-0">
+                                    <img src="../img-icon/receipt.png" width="30px"> Đơn mua
+                                </a>
+                            </li>
+                            <li>
+                                <a href="profile/@context.User.Identity.Name" id="open-update-profile" value="CV001" class="dropdown-item btn-outline-dark m-0">
+                                    <img src="../img-icon/user.png" width="30px"> Thông tin cá nhân
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a id="logout" class="dropdown-item m-0" href="/logout">
+                                    <img src="../img-icon/shutdown.png" width="30px">
+                                    Đăng Xuất
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </Authorized>
+            </AuthorizeView>
+        </div>
+        <article class="content">
+            @Body
+        </article>
+        <footer style="background-color: #1C2331; width: 100%;">
+
+            <!-- Footer Links -->
+            <div class="end" style="margin-left: 10%;">
+                <ul>
+                    <li> <a href="camera">CAMERA </a></li>
+                    <li> <a href="videocam">VIDEO CAM</a></li>
+                    <li> <a href="accessories">ACCESSORIES</a></li>
+                    <li> <a href="guarantee">GUARANTEE </a> </li>
+                    <li> <a href="contact">CONTACT </a> </li>
+                </ul>
+            </div>
+            <div class="end">
+                <ul>
+                    <h6> Đồng Sáng Lập</h6>
+                    <li><a target="_blank" href="https://www.facebook.com/Cute2610">Trần Thị Thu Thanh</a></li>
+                    <li><a target="_blank" href="https://www.facebook.com/anh.quan.deku/">Phan Anh Quân</a></li>
+                    <li><a target="_blank" href="https://www.facebook.com/thanhthang.itsgu">Phan Thanh Thắng</a></li>
+                    <li><a target="_blank" href="https://www.facebook.com/nguyenphuhongloan">Nguyễn Phú Hồng Loan</a></li>
+                </ul>
+            </div>
+            <div class="end">
+                <h6> Liên Hệ </h6>
+                <h8>
+                    <i class="fa fa-home mr-3"></i> 273 An Dương Vương, Quận 5, TP. Hồ Chí Minh
+                </h8><br>
+                <h8>
+                    <i class="fa fa-envelope mr-3"></i> goldduckcamera@gmail.com
+                </h8><br>
+                <h8>
+                    <i class="fa fa-phone mr-3"></i> + 01 234 567 88
+                </h8><br>
+                <h8>
+                    <i class="fa fa-print mr-3"></i> + 01 234 567 89
+                </h8><br>
+            </div>
+            <div class="copyright">
+                <a href="" class="f-left-1">© 2022 Copyright: goldduckcamera.com</a>
+                <a target="_blank" href="https://www.facebook.com/Cute2610" class="f-left-2" style="margin-left: 2% ;"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                <a target="_blank" href="https://www.instagram.com/thanh_tranthithu/" class="f-left-2"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                <a target="_blank" href="#" class="f-left-2"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                <a target="_blank" href="https://www.youtube.com/channel/UC9sbR6aLg0ftGiC41ILVIlQ?view_as=subscriber" class="f-left-2"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+            </div>
+
+        </footer>
+    </main>
+</div>
+
+@code {
+}

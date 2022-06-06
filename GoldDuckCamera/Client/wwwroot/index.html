@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Gold Duck Camera</title>
+    <base href="/" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/auth.css" rel="stylesheet" />
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+    <link href="css/app_blazor.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="img-icon/iconweb.ico">
+    <link rel="stylesheet" href="css/mycss.css">
+    <link rel="stylesheet" href="vendors/toastify/toastify.css">
+    <link rel="stylesheet" href="vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="vendors/bootstrap-icons/bootstrap-icons.css">
+    <link href="GoldDuckCamera.Client.styles.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="app" class="row"><img class="col-4 offset-4 mt-3" src="img-icon/loading.gif" /></div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script src="vendors/toastify/toastify.js"></script>
+    <script src="vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="vendors/jquery/jquery.min.js"></script>
+    <script src="vendors/jquery/jquery.validate.js"></script>
+    <script src="vendors/apexcharts/apexcharts.js"></script>
+    <script>
+        function ScrollToTop() {
+            document.documentElement.scrollTop = 0;
+        }
+        function CartCount() {
+            document.getElementById('cartcount').classList.remove('d-none');
+            var x = $("#cartcount").html();
+            if (x == "") {
+                $("#cartcount").html("1")
+            } else {
+                var count = parseInt(x);
+                x++;
+                $("#cartcount").html(x)
+            }
+        }
+        function firstCartCount() {
+            var product = JSON.parse(localStorage.getItem("Cart"));
+            if (product != null) {
+                document.getElementById('cartcount').classList.remove('d-none');
+                var productArray = product.split("|");
+                var count = 0;
+                for (var i = 0; i < productArray.length - 1; i++) {
+                    count += parseInt(productArray[i].split(",")[1]);
+                }
+                $("#cartcount").html(count)
+
+            }
+        }
+        function cartproductFoo() {
+            window.location.href = 'cartproduct';
+        }
+        function paymentNext() {
+            $('#billCart').removeClass('d-none');
+            $('#cartContent').addClass('d-none');
+        }
+        function paymentBack() {
+            $('#billCart').addClass('d-none');
+            $('#cartContent').removeClass('d-none');
+        }
+        function addressBill() {
+            $('#addressBill').removeClass('d-none');
+        }
+        function addressBillRemove() {
+            $('#addressBill').addClass('d-none');
+        }
+        function onLoad() {
+            window.location.href = "https://localhost:7037/";
+        }
+    </script>
+</body>
+
+</html>

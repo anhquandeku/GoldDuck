@@ -1,0 +1,201 @@
+@page "/brand/index"
+
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+@inject HttpClient _httpClient
+@attribute [Authorize(Roles ="admin, staff")]
+<br />
+<br />
+<div class="title" style="text-align:center;">
+    <h3 style="font-weight: bold;">BRAND MANAGEMENT</h3><br />
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group position-relative has-icon-right">
+            <input type="text" class="form-control" placeholder="Search by brand name" @bind="@search">
+            <button class="btn form-control-icon" style="border:none;" @onclick="@Search">
+                <i class="bi bi-search"></i>
+            </button>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <a href="/brand/addbrand" style="float:right">
+            <button class="btn btn-success"><i class="bi bi-patch-plus icon-mid"></i> Add brand</button>
+        </a>
+    </div>
+</div>
+<br />
+<div class="row">
+    @if (brandList1 != null)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in brandList1)
+                {
+                    <tr>
+                        <td>@p.id</td>
+                        <td>@p.name</td>
+                        <td>
+                            <a href="/brand/editbrand/@p.id">
+                                <button type="button" class="btn btn-sm btn-outline-success" style="padding-top: 7px;">
+                                    <i class="bi bi-gear"></i>
+                                </button>
+                            </a>
+                            <button type="button" class="btn btn-sm btn-outline-danger" style="padding-top: 7px;" @onclick="@(e => Delete_Click(p.id.ToString()))">
+                                <i class="bi bi-trash-fill"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+                <Confirmation ConfirmationMessage="@($"Are you sure to delete?")"
+                          ConfirmationTitle="Delete Brand"
+                          @ref="DeleteConfirmation"
+                          ConfirmationChanged="ConfirmDelete_Click">
+                </Confirmation>
+            </tbody>
+        </table>
+    }
+</div>
+<br />
+<div class="row">
+    <div class="pagination justify-content-center mb-2">
+        @if (pagenum > 1)
+        {
+            <button class="m-1 page-item btn btn-outline-dark" onclick="@PrePage"><i class="bi bi-caret-left"></i></button>
+        }
+        else
+        {
+            <button class="m-1 page-item btn btn-outline-dark disabled"><i class="bi bi-caret-left"></i></button>
+        }
+        @for (int i = 0; i < @totalPage; i++)
+        {
+            int index = i;
+            <a id="page-@i" class="m-1 page-item btn btn-outline-dark @activeClass[i]"
+           @onclick="@(e => PageCurrent(index+1))" value="@(i+1)">@(i+1)</a>
+        }
+        @if (pagenum < totalPage)
+        {
+            <button class="m-1 page-item btn btn-outline-dark" onclick="@NextPage"><i class="bi bi-caret-right"></i></button>
+        }
+        else
+        {
+            <button class="m-1 page-item btn btn-outline-dark disabled"><i class="bi bi-caret-right"></i></button>
+        }
+    </div>
+</div>
+<br />
+<br />
+@code {
+    int pagenum = 1;
+    int totalPage = 0;
+    string search = "";
+    List<string> activeClass = new List<string>();
+    List<BrandViewModel> brandList = new List<BrandViewModel>();
+    List<BrandViewModel> brandList1 = new List<BrandViewModel>();
+    public string id { get; set; }
+    protected Confirmation DeleteConfirmation { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await _httpClient.GetAsync("api/brand");
+        response.EnsureSuccessStatusCode();
+        brandList = await response.Content.ReadFromJsonAsync<List<BrandViewModel>>();
+        brandList = new List<BrandViewModel>(brandList.Where(p => p.status == 1));
+        double total = brandList.Count / 10.0;
+        totalPage = (int)Math.Ceiling(total);
+        for (int i = (pagenum - 1) * 10; i < pagenum * 10; i++)
+        {
+            if (i < brandList.Count)
+            {
+                brandList1.Add(brandList[i]);
+            }
+            else break;
+        }
+        for (int i = 0; i < totalPage; i++)
+        {
+            activeClass.Add("");
+        }
+        activeClass[0] = "active";
+    }
+
+    public async void PageCurrent(int index)
+    {
+
+        pagenum = index;
+        brandList1.Clear();
+        for (int i = (pagenum - 1) * 10; i < pagenum * 10; i++)
+        {
+            if (i < brandList.Count)
+            {
+                brandList1.Add(brandList[i]);
+            }
+            else break;
+        }
+        for (int i = 0; i < totalPage; i++)
+        {
+            activeClass[i] = "";
+        }
+        activeClass[index - 1] = "active";
+        await JsRuntime.InvokeVoidAsync("ScrollToTop");
+    }
+
+    public async void NextPage()
+    {
+        pagenum += 1;
+        PageCurrent(pagenum);
+    }
+
+    public async void PrePage()
+    {
+        pagenum -= 1;
+
+        PageCurrent(pagenum);
+    }
+
+    protected void Delete_Click(string Id)
+    {
+        id = Id;
+        DeleteConfirmation.Show();
+    }
+
+    protected async Task ConfirmDelete_Click(bool deleteConfirmed)
+    {
+        if (deleteConfirmed)
+        {
+            var response = await Http.DeleteAsync("api/brand/" + id);
+            bool deleteResponse = await response.Content.ReadFromJsonAsync<bool>();
+            if (deleteResponse)
+            {
+                var response1 = await _httpClient.GetAsync("api/brand");
+                response1.EnsureSuccessStatusCode();
+                brandList = await response1.Content.ReadFromJsonAsync<List<BrandViewModel>>();
+                brandList = new List<BrandViewModel>(brandList.Where(p => p.status == 1));
+                double total = brandList.Count / 10.0;
+                totalPage = (int)Math.Ceiling(total);
+                if (brandList1.Count == 1)
+                    PageCurrent(1);
+                else PageCurrent(pagenum);
+            }
+        }
+    }
+
+    public async void Search()
+    {
+        var response = await _httpClient.GetAsync("api/brand");
+        response.EnsureSuccessStatusCode();
+        brandList = await response.Content.ReadFromJsonAsync<List<BrandViewModel>>();
+        var lowerCaseSearchTerm = search.Trim().ToLower();
+        brandList = new List<BrandViewModel>(brandList.Where(p => (p.name.ToLower().Contains(lowerCaseSearchTerm) && p.status == 1)));
+        double total = brandList.Count / 10.0;
+        totalPage = (int)Math.Ceiling(total);
+        PageCurrent(1);
+    }
+ }

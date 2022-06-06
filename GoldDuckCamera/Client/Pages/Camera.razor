@@ -1,0 +1,339 @@
+﻿@page "/camera"
+
+@inject HttpClient _httpClient
+@inject IJSRuntime JsRuntime
+@inject NavigationManager NavigationManager
+@inject Blazored.LocalStorage.ILocalStorageService localStore
+@attribute [Authorize(Roles ="customer")]
+<PageTitle>Camera</PageTitle>
+
+
+<!-- Sản phẩm-->
+<div class="row min-vh-100">
+    <EditForm Model="@ProductSearchList">
+    <div class="col-md-10 offset-1 mb-1">
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><i
+                    class="bi bi-search"></i></span>
+            <input @bind="@search" type="text" class="form-control border-3"
+                placeholder="Search..."
+                aria-label="Recipient's username"
+                aria-describedby="button-addon2">
+            </input>
+            <button class="btn btn-outline-secondary" @onclick="@Search">Search</button>
+        </div>
+    </div>
+    <div class="col-12 offset-0 col-xl-11 offset-xl-1 mt-2">
+        <div class="row">
+            <div class="col-12 offset-0 col-xl-10">
+                <div class="row m-2">
+                    <button type="button" class="col-3 btn btn-outline-primary border-3 m-1" @onclick="UpTo">@upDown</button>
+                    <select class="form-select btn-outline-primary border-3 m-1" style="width:30%"  @bind="@brand">
+                       <option value="0">Thương Hiệu</option>
+                        @if (brands != null)
+                        {
+                            @foreach (var brand in brands)
+                            {
+                                <option class="text-capitalize" value="@brand.id">@brand.name</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    </EditForm>
+    <div class="col-10 offset-1 mt-5">
+        <div class="row">
+            @if(productCameraList != null)
+            {
+                @for(int i = (@pagenum-1)*12; i<@pagenum*12;i++){
+                    @if(i > (productCameraList.Count - 1))
+                    {
+                        break;
+                    }
+                    int index = i;
+                    <div class="col-4 col-xl-3 mb-3" >
+                    <div class="row product m-1">
+                        <img class="col-12 product-img" src="../img-sanpham/@imgList[i]" alt="Canon" height="170px">
+                        <div class="col-12 product-info">
+                            <p class="text-dark fw-bold xuongdong fs-6" >@productCameraList[i].name</p>
+                            <p class="text-danger fw-bold fs-5">@(FormatVND(productCameraList[i].price,1))</p>
+                        </div>
+                        <div class="product-action col-12" @onmouseover="(e) => ProductImg(1,index)"
+                             @onmouseout="@(e => ProductImg(0,index))">
+                            <div class="h-50"></div>
+                            <div class="row h-25 p-4">
+                                <a type="button" href="/detail/@productCameraList[i].id"data-toggle="tooltip" data-placement="top" title="Chi tiết"
+                                   class="btn btn-success col-3 offset-1" style="margin-right:2%">
+                                    <i class="bi bi-search"></i>
+                                </a>
+                                <a type="button" data-toggle="tooltip" data-placement="top" title="Thêm vào giỏ hàng"
+                                   class="btn btn-success col-3" @onclick="@(e => UpdateLocalStorage(index))" style="margin-right:2%">
+                                    <i class="bi bi-basket"></i>
+                                </a>
+                                <a type="button" data-toggle="tooltip" data-placement="top" title="Mua ngay"
+                                   class="btn btn-success col-3" @onclick="@(e => UpdateLocalStorageNow(index))" style="margin-right:2%">
+                                    <i class="bi bi-cart3"></i>
+                                </a>
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+                }
+            } 
+        </div>
+    </div>
+</div>
+<div class="pagination justify-content-center mb-2">
+    @for(int i =0; i< @totalPage; i++){
+        int index = i;
+        <a id="page-@i" class="m-1 page-item btn btn-outline-dark @activeClass[i]"
+        @onclick="@(e => PageCurrent(index+1))" value="@(i+1)">@(i+1)</a>
+    }
+</div>
+
+
+
+@code {
+    List<string> imgList = new List<string>();
+    List<string> activeClass = new List<string>();
+    List<BrandViewModel> brands = new List<BrandViewModel>();
+    int pagenum = 1;
+    int totalPage = 0;
+    List<ProductViewModel> productList = new List<ProductViewModel>();
+    List<ProductViewModel> productCameraList = new List<ProductViewModel>();
+    string upDown = "Giá Tăng Dần";
+    private ProductSearchList ProductSearchList = new ProductSearchList();
+    string search = "";
+    int brand = 0;
+    protected override async Task OnInitializedAsync()
+    {
+        
+        var response = await _httpClient.GetAsync("api/product");
+        var response_Brand = await _httpClient.GetAsync("api/brand");
+        await JsRuntime.InvokeVoidAsync("firstCartCount");
+        response.EnsureSuccessStatusCode();
+        response_Brand.EnsureSuccessStatusCode();
+        productList = await response.Content.ReadFromJsonAsync<List<ProductViewModel>>();
+        brands = await response_Brand.Content.ReadFromJsonAsync<List<BrandViewModel>>();
+        foreach(var product in productList)
+        {
+            if(product.idCategory == 1)
+            {
+                productCameraList.Add(product);
+                imgList.Add(product.img1);
+            }
+        }
+        double total = productCameraList.Count / 12.0;
+        totalPage = (int)Math.Ceiling(total);
+        for (int i= 0; i <totalPage; i++)
+        {
+            activeClass.Add("");
+        }
+        activeClass[0] = "active";
+        
+    }
+
+    public async void Ngune()
+    {
+        await JsRuntime.InvokeVoidAsync("firstCartCount");
+    }
+
+    public void ProductImg(int position, int index)
+    {
+        if (position == 1)
+        {
+            imgList[index] = productCameraList[index].img2;
+
+        }
+        else
+        {
+            imgList[index] = productCameraList[index].img1;
+        }
+    }
+
+    public async void PageCurrent(int index)
+    {
+        pagenum = index;
+        for (int i= 0; i <totalPage; i++)
+        {
+            activeClass[i] = "";
+        }
+        activeClass[index - 1] = "active";
+        await JsRuntime.InvokeVoidAsync("ScrollToTop");
+    }
+
+
+    public async void Search()
+    {
+        var response = await _httpClient.GetAsync("api/product");
+        productList = await response.Content.ReadFromJsonAsync<List<ProductViewModel>>();
+        var lowerCaseSearchTerm = search.Trim().ToLower();
+        if (brand != 0)
+            productCameraList = new List<ProductViewModel>(productList.Where(p => (p.name.ToLower().Contains(lowerCaseSearchTerm) 
+                                                            && p.idBrand == brand && p.idCategory == 1)));
+        else
+            productCameraList = new List<ProductViewModel>(productList.Where(p => p.name.ToLower().Contains(lowerCaseSearchTerm) && p.idCategory == 1));
+
+        imgList.Clear();
+        foreach(var product in productCameraList)
+        {
+               imgList.Add(product.img1);
+        }
+        
+        double total = productCameraList.Count / 12.0;
+        totalPage = (int)Math.Ceiling(total);
+        for (int i= 0; i <totalPage; i++)
+        {
+            activeClass.Add("");
+        }
+        activeClass[0] = "active";
+    }
+
+    public void UpTo()
+    {
+        if(upDown == "Giá Tăng Dần")
+        {
+            upDown = "Giá Giảm Dần";
+            productCameraList.Sort(
+                delegate(ProductViewModel p1, ProductViewModel p2)
+                {
+                    return p1.price.CompareTo(p2.price);
+                }
+            );
+            int i = 0;
+            foreach (var item in productCameraList)
+            {
+                imgList[i] = item.img1;
+                i++;
+            }
+        } else
+        {
+            upDown = "Giá Tăng Dần";
+            productCameraList.Sort(
+                delegate(ProductViewModel p1, ProductViewModel p2)
+                {
+                    return p2.price.CompareTo(p1.price);
+                }
+            );
+            int i = 0;
+            foreach (var item in productCameraList)
+            {
+                imgList[i] = item.img1;
+                i++;
+            }
+        }
+
+    }
+
+    public string FormatVND(int a, int b)
+    {
+        int value = a*b;
+        return String.Format("{0:n0}", value) + " VND";
+    }
+
+    // Local Storage
+    public async void UpdateLocalStorage(int id)
+    {
+        await JsRuntime.InvokeVoidAsync("CartCount");
+        string[] cart;
+        int[] idProduct;
+        int[] count;
+        bool check = false;
+        string noteContent = await localStore.GetItemAsync<string>("Cart");
+        await localStore.RemoveItemAsync("Cart");
+        if (noteContent != null)
+        {
+            cart = noteContent.Split("|");
+            idProduct = new int[cart.Length -1];
+            count = new int[cart.Length-1];
+            for (int i = 0; i < cart.Length -1; i++)
+            {
+                idProduct[i] = Int32.Parse(cart[i].Split(",")[0]);
+                count[i] = Int32.Parse(cart[i].Split(",")[1]);
+            }
+            for (var i = 0; i < cart.Length -1; i++)
+            {
+                if (idProduct[i] == productCameraList[id].id)
+                {
+                    count[i] += 1;
+                    check = true;
+                    break;
+                }
+            }
+            if (check == true)
+            {
+                noteContent = "";
+                for (int i=0; i< cart.Length -1; i++)
+                {
+                    noteContent += idProduct[i] + "," + count[i] + "|";
+                }
+            }
+        }
+        if (check)
+        {
+            await localStore.SetItemAsync("Cart", noteContent);
+
+        }
+        else
+        {
+            string context = noteContent + productCameraList[id].id + ",1|"; 
+            await localStore.SetItemAsync("Cart", context);
+        }
+    }
+
+    public async void UpdateLocalStorageNow(int id)
+    {
+        
+        string[] cart;
+        int[] idProduct;
+        int[] count;
+        bool check = false;
+        string noteContent = await localStore.GetItemAsync<string>("Cart");
+        await localStore.RemoveItemAsync("Cart");
+        if (noteContent != null)
+        {
+            cart = noteContent.Split("|");
+            idProduct = new int[cart.Length -1];
+            count = new int[cart.Length-1];
+            for (int i = 0; i < cart.Length -1; i++)
+            {
+                idProduct[i] = Int32.Parse(cart[i].Split(",")[0]);
+                count[i] = Int32.Parse(cart[i].Split(",")[1]);
+            }
+            for (var i = 0; i < cart.Length -1; i++)
+            {
+                if (idProduct[i] == productCameraList[id].id)
+                {
+                    count[i] += 1;
+                    check = true;
+                    break;
+                }
+            }
+            if (check == true)
+            {
+                noteContent = "";
+                for (int i=0; i< cart.Length -1; i++)
+                {
+                    noteContent += idProduct[i] + "," + count[i] + "|";
+                }
+            }
+        }
+        if (check)
+        {
+            await localStore.SetItemAsync("Cart", noteContent);
+
+        }
+        else
+        {
+            string context = noteContent + productCameraList[id].id + ",1|"; 
+            await localStore.SetItemAsync("Cart", context);
+        }
+        await JsRuntime.InvokeVoidAsync("cartproductFoo");
+    }
+
+
+}

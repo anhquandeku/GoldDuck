@@ -1,0 +1,222 @@
+﻿@page "/product/addproduct"
+
+@using System.IO;
+@using Tewr.Blazor.FileReader;
+
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+@inject HttpClient _httpClient
+@inject IFileReaderService fileReader;
+@inject IFileReaderService fileReader_2;
+@attribute [Authorize(Roles = "admin, staff")]
+
+<br />
+<br />
+<h2>Add Product</h2>
+<br />
+<form onsubmit="@UploadFileAsync">
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="username"> Product Name: </label>
+                <input form="name" class="form-control" @bind="@product.name" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="category"> Category: </label>
+                <select class="form-control" name="category" @bind="@product.idCategory">
+                    <option value="0">Chọn</option>
+                    @foreach (var c in categoryList)
+                    {
+                        <option value="@c.id">@c.name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="brand"> Brand:</label>
+                <select class="form-control" name="brand" @bind="@product.idBrand">
+                    <option value="0">Chọn</option>
+                    @foreach (var c in brandList)
+                    {
+                        <option value="@c.id">@c.name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="price"> Price</label>
+                <input form="price" class="form-control" @bind="@product.price" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="price"> Cost</label>
+                <input type="text" form="price" class="form-control" @bind="@product.cost" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="number"> Number: </label>
+                <input type="text" form="number" class="form-control" @bind="@product.count" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="guarantee"> Guarantee: </label>
+                <input type="text" form="number" class="form-control" @bind="@product.guarantee" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="sale"> Sale: *</label>
+                <input form="address" class="form-control" @bind="@product.sale" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Image 1: </label>
+                    <input type="file" @ref="elementReference" class="form-control" @onchange="async() => await openFileAsync()" />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Image 2: </label>
+                    <input type="file" @ref="elementReference_2" class="form-control" @onchange="async() => await openFileAsync_2()" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="specification"> Specification *</label>
+                <input form="address" class="form-control" @bind="@product.specifications" />
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input type="button" class="btn btn-primary" @onclick="@Save" value="Save" />
+                    <input type="button" class="btn" @onclick="@Cancel" value="Cancel" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<br />
+<br />
+<br />
+<br />
+@code {
+    ElementReference elementReference;
+    ElementReference elementReference_2;
+    string message = "";
+    string imagePath = null;
+    string fileName = "";
+    string type = "";
+    string size = "";
+    Stream fileStream = null;
+    string imagePath_2 = null;
+    string fileName_2 = "";
+    string type_2 = "";
+    string size_2 = "";
+    Stream fileStream_2 = null;
+
+    async Task openFileAsync()
+    {
+        var file = (await fileReader.CreateReference(elementReference).EnumerateFilesAsync()).FirstOrDefault();
+        if (file == null)
+            return;
+        var fileInfo = await file.ReadFileInfoAsync();
+        fileName = fileInfo.Name;
+        size = $"{fileInfo.Size}b";
+        type = fileInfo.Type;
+        using (var memoryStream = await file.CreateMemoryStreamAsync((int)fileInfo.Size))
+        {
+            fileStream = new MemoryStream(memoryStream.ToArray());
+        }
+
+    }
+    async Task openFileAsync_2()
+    {
+        var file = (await fileReader_2.CreateReference(elementReference_2).EnumerateFilesAsync()).FirstOrDefault();
+        if (file == null)
+            return;
+        var fileInfo = await file.ReadFileInfoAsync();
+        fileName_2 = fileInfo.Name;
+        size_2 = $"{fileInfo.Size}b";
+        type_2 = fileInfo.Type;
+        using (var memoryStream = await file.CreateMemoryStreamAsync((int)fileInfo.Size))
+        {
+            fileStream_2 = new MemoryStream(memoryStream.ToArray());
+            
+        }
+
+    }
+    async Task UploadFileAsync()
+    {
+        var content = new MultipartFormDataContent();
+        content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data");
+        content.Add(new StreamContent(fileStream, (int)fileStream.Length), "image", fileName);
+        var res = await Http.PostAsync("api/file", content);
+        var content_2 = new MultipartFormDataContent();
+        content_2.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data");
+        content_2.Add(new StreamContent(fileStream_2, (int)fileStream_2.Length), "image", fileName_2);
+        var res_2 = await Http.PostAsync("api/file", content_2);
+    }
+
+    ProductViewModel product = new ProductViewModel();
+    List<BrandViewModel> brandList = new List<BrandViewModel>();
+    List<CategoryViewModel> categoryList = new List<CategoryViewModel>();
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await _httpClient.GetAsync("api/category");
+        response.EnsureSuccessStatusCode();
+        categoryList = await response.Content.ReadFromJsonAsync<List<CategoryViewModel>>();
+        categoryList = new List<CategoryViewModel>(categoryList.Where(p => p.status == 1));
+        var response_2 = await Http.GetAsync("api/brand");
+        response_2.EnsureSuccessStatusCode();
+        brandList = await response_2.Content.ReadFromJsonAsync<List<BrandViewModel>>();
+        brandList = new List<BrandViewModel>(brandList.Where(p => p.status == 1));
+
+    }
+
+    public async Task Save()
+    {
+        product.img1 = fileName;
+        product.img2 = fileName_2;
+        product.date = DateTime.Now;
+        product.sold = 0;
+        product.status = 1;
+        var response = await Http.PostAsJsonAsync("api/product", @product);
+        ProductViewModel productResponse = await response.Content.ReadFromJsonAsync<ProductViewModel>();
+        if (productResponse.name != null)
+        {
+
+            await UploadFileAsync();
+            await JsRuntime.InvokeVoidAsync("alert", "Saved Successfully!");
+            Cancel();
+        }
+        else
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Saved Fail!");
+        }
+
+
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("product/index");
+    }
+
+
+}

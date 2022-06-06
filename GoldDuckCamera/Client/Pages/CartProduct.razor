@@ -1,0 +1,338 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+
+@page "/cartproduct"
+@inject HttpClient Http
+@inject HttpClient _httpClient
+@inject IJSRuntime JsRuntime
+@inject Blazored.LocalStorage.ILocalStorageService localStore
+@inject NavigationManager NavigationManager
+@attribute [Authorize(Roles ="customer")]
+<!-- giỏ hàng-->
+<div class="row mt-3" id="cartContent">
+    <h1 class="col-12 font-weight-bold text-success text-center fs-lg-3">
+        Chi tiết đơn hàng
+    </h1>
+    <a class="history col-1 offset-11" href="history">
+        <i class="fa fa-history" aria-hidden="true"></i>
+    </a>
+    <table class="table col-12">
+        <thead class="table-success">
+            <tr>
+                <th scope="col">Hình ảnh</th>
+                <th scope="col">Tên</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Xóa</th>
+                <th scope="col">Tổng cộng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (productList != null)
+            {
+
+                @for (int i = 0; i < productList.Count; i++)
+                {
+                    int index = i;
+                    <tr>
+                        <td><img src="../img-sanpham/@productList[i].img1" width="100px" /></td>
+                        <td>@productList[i].name</td>
+                        <td>@(FormatVND(productList[i].price,0))</td>
+                        <td>
+                            <a class="quanty quanty-left" @onclick="@(e => BuyQuantityDown(index))">-</a>
+                            <input class="quanty quanty-center" value="@countList[i]" disabled />
+                            <a class="quanty quanty-right" @onclick="@(e => BuyQuantityUp(index))">+</a>
+                        </td>
+                        <td class="trash" @onclick="@(e => DeleteProduct(index))"><i class="bi bi-trash"></i></td>
+                        <td>@(Format(productList[index].price,productList[index].sale,countList[index]))</td>
+                    </tr>
+                }
+
+            }
+        </tbody>
+    </table>
+    <div class="col-4 offset-8">
+        <div class="row mt-2">
+            <label class="col-4">Tạm tính:</label>
+            <div class="col-8 text-black" style="text-align:end">
+                @FormatTotal(total)
+            </div>
+        </div>
+        <div class="row mt-2">
+            <label class="col-4">Giảm giá:</label>
+            <div class="col-8 text-black" style="text-align:end">
+                @FormatTotal((total - realTotal))
+            </div>
+        </div>
+        <div class="row mt-2">
+            <label class="col-4">Tổng cộng:</label>
+            <div class="col-8 text-black" style="text-align:end">
+                @FormatTotal(realTotal)
+            </div>
+        </div>
+    </div>
+    <button class="col-4 offset-8 btn btn-success mt-2 mb-2" @onclick="paymentNext">Tiến hành thanh toán</button>
+</div>
+<!-- Hóa đơn -->
+
+<div class="col-8 offset-2 d-none" id="billCart">
+    <div class="col-12 mt-3" @onclick="paymentBack">
+        <i class="bi bi-arrow-left-square btn-success"></i>
+        <a class="h3" style=" color:rgb(30, 90, 94); cursor: pointer;"> Trở về</a>
+    </div>
+    <div class="card">
+        <ul id="tomtat" class="list-group list-group-flush border-2 border border-success">
+            <li class="list-group-item bg-success" style="height: 20px;"></li>
+            <li class="list-group-item mb-3">
+                <div class="row">
+                    <h6 class="col-2 text-black">Địa chỉ nhận hàng</h6>
+                    <button class="col-1 offset-9 btn btn-info  mt-2" @onclick="AddressBill">Sửa</button>
+                    <p class="col-10">
+                        <strong>@fullname (+84) @numberphone</strong> @addressReal
+                    </p>
+                    <div class="col-12 row d-none" id="addressBill">
+                        <label class="col-6"><strong>Tên người nhận:</strong></label>
+                        <label class="col-6"><strong>Số điện thoại:</strong></label>
+                        <input @bind="@name" class="border border-1 border-dark col-5" style="margin-left:20px" />
+                        <input @bind="@phone" class="border border-1 border-dark col-5" style="margin-left:60px" />
+                        <label class="col-12"><strong>Địa chỉ:</strong></label>
+                        <textarea @bind="@address" class="border border-1 border-dark col-9 m-2"></textarea>
+                        <button class="col-2 btn btn-danger mt-3 mb-3" @onclick="AddressBillRemove">Thay đổi</button>
+                    </div>
+
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    @if (productList != null)
+                    {
+
+                        @for (int i = 0; i < productList.Count; i++)
+                        {
+                            <p class="col-7 text-primary">@productList[i].name x @countList[i]</p>
+                            <p class="col-5 text-end">@(Format(productList[i].price,productList[i].sale,countList[i]))</p>
+                        }
+                    }
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <p class="col-7">Tạm tính:</p>
+                    <p class="col-5 text-end">@FormatTotal(total)</p>
+                    <p class="col-7 text-danger font-italic">Khuyến mãi:</p>
+                    <p class="col-5 text-danger font-italic text-end">
+                        @FormatTotal((total - realTotal))
+                    </p>
+                    <p class="col-7">Phí vận chuyển:</p>
+                    <p class="col-5 text-end">@FormatVND((total - realTotal),95)</p>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <p class="col-7"><strong>Thành tiền:</strong></p>
+                    <p class="col-5 text-end"><strong>@FormatTotal(realTotal)</strong></p>
+                </div>
+            </li>
+        </ul>
+        <div class="row mt-3">
+            <button @onclick="Save" class="col-4 offset-4 btn btn-danger mb-3">
+                <strong>Đặt hàng</strong>
+            </button>
+        </div>
+    </div>
+</div>
+
+@code {
+    string[] cart;
+    List<int> idProduct = new List<int>();
+    List<int> countList = new List<int>();
+    List<ProductViewModel> productList = new List<ProductViewModel>();
+    BillViewModel bill1 = new BillViewModel();
+    List<BillViewModel> billList = new List<BillViewModel>();
+    string temp;
+    int total;
+    int realTotal;
+    string name = "";
+    string phone = "";
+    string address = "";
+    string fullname = "Thu Thanh";
+    string numberphone = "703360196";
+    string addressReal = "Quan 1, HCM";
+    UserViewModel userBill = new UserViewModel();
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+
+        total = 0;
+        realTotal = 0;
+        string noteContent = await localStore.GetItemAsync<string>("Cart");
+        await JsRuntime.InvokeVoidAsync("firstCartCount");
+        if (noteContent != null)
+        {
+            cart = noteContent.Split("|");
+            for (int i = 0; i < cart.Length - 1; i++)
+            {
+                idProduct.Add(Int32.Parse(cart[i].Split(",")[0]));
+                countList.Add(Int32.Parse(cart[i].Split(",")[1]));
+            }
+            ProductViewModel product = new ProductViewModel();
+            for (int i = 0; i < cart.Length - 1; i++)
+            {
+                product = await Http.GetFromJsonAsync<ProductViewModel>("api/product/" + idProduct[i]);
+                productList.Add(product);
+                int value = product.price * countList[i];
+                int realValue = (product.price * (100 - product.sale) / 100) * countList[i];
+                total += value;
+                realTotal += realValue;
+            }
+        }
+
+    }
+
+    public string FormatVND(int a, int b)
+    {
+        int value = a * (100 - b) / 100;
+        return String.Format("{0:n0}", value) + " VND";
+    }
+
+    public string FormatTotal(int a)
+    {
+        return String.Format("{0:n0}", a) + " VND";
+    }
+
+    public string Format(int a, int b, int c)
+    {
+        int value = a * c;
+        return String.Format("{0:n0}", value) + " VND";
+    }
+    public async void BuyQuantityUp(int index)
+    {
+        total += productList[index].price;
+        realTotal += (productList[index].price * (100 - productList[index].sale) / 100);
+        countList[index]++;
+        string noteContent = "";
+        for (int i = 0; i < productList.Count; i++)
+        {
+            noteContent += idProduct[i] + "," + countList[i] + "|";
+        }
+        await localStore.RemoveItemAsync("Cart");
+        await localStore.SetItemAsync("Cart", noteContent);
+        await JsRuntime.InvokeVoidAsync("firstCartCount");
+    }
+
+    public async void BuyQuantityDown(int index)
+    {
+        if (countList[index] > 1)
+        {
+            countList[index]--;
+            total -= productList[index].price;
+            realTotal -= (productList[index].price * (100 - productList[index].sale) / 100);
+        }
+        string noteContent = "";
+        for (int i = 0; i < productList.Count; i++)
+        {
+            noteContent += idProduct[i] + "," + countList[i] + "|";
+        }
+        await localStore.RemoveItemAsync("Cart");
+        await localStore.SetItemAsync("Cart", noteContent);
+        await JsRuntime.InvokeVoidAsync("firstCartCount");
+    }
+
+    public async void DeleteProduct(int index)
+    {
+        productList.RemoveAt(index);
+        countList.RemoveAt(index);
+        string noteContent = "";
+        for (int i = 0; i < productList.Count; i++)
+        {
+            noteContent += idProduct[i] + "," + countList[i] + "|";
+        }
+        await localStore.RemoveItemAsync("Cart");
+        await localStore.SetItemAsync("Cart", noteContent);
+        await JsRuntime.InvokeVoidAsync("firstCartCount");
+    }
+
+    public async void paymentNext()
+    {
+        var authState = await authenticationStateTask;
+        var user = authState.User;
+        string usernameAccount = user.Identity.Name;
+        userBill = await Http.GetFromJsonAsync<UserViewModel>("api/user/" + usernameAccount);
+        name = userBill.fullname;
+        phone = userBill.phone;
+        address = userBill.address;
+        await JsRuntime.InvokeVoidAsync("paymentNext");
+        await JsRuntime.InvokeVoidAsync("ScrollToTop");
+
+    }
+
+    public async void paymentBack()
+    {
+        await JsRuntime.InvokeVoidAsync("paymentBack");
+        await JsRuntime.InvokeVoidAsync("ScrollToTop");
+    }
+
+    public async void AddressBill()
+    {
+        await JsRuntime.InvokeVoidAsync("addressBill");
+        await JsRuntime.InvokeVoidAsync("ScrollToTop");
+    }
+
+    public async void AddressBillRemove()
+    {
+        fullname = name;
+        addressReal = address;
+        numberphone = phone.Substring(1);
+        await JsRuntime.InvokeVoidAsync("addressBillRemove");
+        await JsRuntime.InvokeVoidAsync("ScrollToTop");
+    }
+
+
+    BillViewModel bill = new BillViewModel();
+
+    protected async Task Save()
+    {
+        var authState = await authenticationStateTask;
+        var user = authState.User;
+
+        bill.address = " (+84)" + numberphone + " " + addressReal;
+        bill.date = DateTime.Now;
+        bill.price = realTotal;
+        bill.fullname = fullname;
+        bill.status = 1;
+        bill.username = user.Identity.Name;
+        var response = await Http.PostAsJsonAsync("api/bill", @bill);
+        BillViewModel billResponse = await response.Content.ReadFromJsonAsync<BillViewModel>();
+        if (billResponse.id != null)
+        {
+            var response1 = await _httpClient.GetAsync("api/bill");
+            response1.EnsureSuccessStatusCode();
+            billList = await response1.Content.ReadFromJsonAsync<List<BillViewModel>>();
+            billList = new List<BillViewModel>(billList.Where(x => x.status == 1));
+            bill1 = billList[billList.Count - 1];
+            for (int i = 0; i < idProduct.Count; i++)
+            {
+                BillDetailViewModel billdetail = new BillDetailViewModel();
+                billdetail.idBill=bill1.id;
+                billdetail.idProduct = idProduct[i];
+                billdetail.count = countList[i];
+                var response2 = await Http.PostAsJsonAsync("api/billdetail", @billdetail);
+            }
+            await localStore.RemoveItemAsync("Cart");
+            await JsRuntime.InvokeVoidAsync("alert", "Saved Successfully!");
+            
+            Cancel();
+            
+        }
+        else
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Saved Fail!");
+        }
+
+    }
+    public async void Cancel()
+    {
+        NavigationManager.NavigateTo("history");
+        await JsRuntime.InvokeVoidAsync("firstCartCount");
+    }
+}

@@ -1,0 +1,158 @@
+﻿@page "/product/detailproduct/{id}"
+
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+@attribute [Authorize(Roles = "admin, staff")]
+<div class="row">
+    <div class="col-12 mt-3" style="color:rgb(30, 90, 94)">
+        <i class="bi bi-caret-left-fill"> </i>
+        <a href="/product/index"> Back</a>
+    </div>
+    <div class="chitietsanpham col-12 mt-3">
+        <div class="row">
+            <div class="chitiet-tensanpham col-12">
+                <h1 class="chitiet-tenitem" itemprop="name">
+                    <a href="#" itemprop="url">@product.name</a>
+                </h1>
+            </div>
+            <div class="col-10 offset-1">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="chitiet-image">
+                            <div id="imageZoom" class="border border-2 border-secondary chitiet-proImg-big-thumb chitiet-zoomImage is-ready">
+                                <img class="" id="imgSelected" src="../img-sanpham/@image" alt="Máy ảnh">
+                            </div>
+                        </div>
+                        <div class="chitiet-images mb-3">
+                            <ul class="chitiet-list-color">
+                                <a class="@selectedImg1" @onclick="Img1" style="margin-right:3%">
+                                <li>
+                                    <img src="../img-sanpham/@product.img1" alt="Máy ảnh" width="70px">
+                                </li>
+                                </a>
+                                <a class="@selectedImg2" @onclick="Img2">
+                                <li>
+                                    <img src="../img-sanpham/@product.img2" alt="Máy ảnh" width="70px">
+                                </li>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="chitiet-thongtinsanpham">
+                            <table class="chitiet-tableInfo">
+                                <tbody>
+                                    <tr>
+                                        <td class="chitiet-table-label">Mã sản phẩm</td>
+                                        <td class="chitiet-table-value">
+                                            <span itemprop="sku">@product.id</span>
+                                            <meta itemprop="mpn">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="chitiet-table-label">Thể loại</td>
+                                        <td class="chitiet-table-value text-capitalize" itemprop="category">@cate.name</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="chitiet-table-label">Thương hiệu</td>
+                                        <td class="chitiet-table-value text-capitalize" itemprop="brand">@brand.name</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="chitiet-table-label">Giá bán</td>
+                                        <td class="chitiet-table-value">
+                                            <span>@product.price VND</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="chitiet-table-label">Giá gốc</td>
+                                        <td class="chitiet-table-value"><span>@product.cost VND</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="chitiet-table-label">Ngày nhập hàng</td>
+                                        <td class="chitiet-table-value"><span>@String.Format("{0:dd/MM/yyyy}",product.date)</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="chitiet-table-label">Tổng số lượng</td>
+                                        <td class="chitiet-table-value">
+                                            <span>@product.count</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="chitiet-table-label">Số lượng đã bán</td>
+                                        <td class="chitiet-table-value">
+                                            <span>@product.sold</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="chitiet-table-label">Khuyến mãi</td>
+                                        <td class="chitiet-table-value">
+                                            <span>@product.sale</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="chitiet-table-label">Thông số kỹ thuật</td>
+                                        <td class="chitiet-table-value" itemprop="brand">@product.specifications</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="chitiet-table-label text-danger">Bảo hành</td>
+                                        <td class="chitiet-table-value text-danger" itemprop="brand">@product.guarantee năm</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br/>
+                        <div class="chitiet-nutnhan row">
+                            <div class="col-6">
+                                <a href="/product/editproduct/@product.id" style="float:right">
+                                    <button class="btn btn-outline-primary"><i class="bi bi-gear-fill icon-mid"></i> Edit product</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+
+@code {
+    [Parameter]
+    public string id { get; set; }
+    string image = "";
+    string selectedImg1 = "selected-img";
+    string selectedImg2 = "";
+    int count = 1;
+    ProductViewModel product = new ProductViewModel();
+    BrandViewModel brand = new BrandViewModel();
+    CategoryViewModel cate = new CategoryViewModel();
+    protected override async Task OnInitializedAsync()
+    {
+        product = await Http.GetFromJsonAsync<ProductViewModel>("api/product/" + id);
+        brand = await Http.GetFromJsonAsync<BrandViewModel>("api/brand/" + product.idBrand);
+        cate = await Http.GetFromJsonAsync<CategoryViewModel>("api/category/" + product.idCategory);
+        image = product.img1;
+    }
+
+
+    public void Img1()
+    {
+        image = product.img1;
+        selectedImg2 = "";
+        selectedImg1 = "selected-img";
+    }
+
+    public void Img2()
+    {
+        image = product.img2;
+        selectedImg1 = "";
+        selectedImg2 = "selected-img";
+    }
+    public string FormatVND(int a, int b)
+    {
+        int value = a * (100 - b) / 100;
+        return String.Format("{0:n0}", value) + " VND";
+    }
+}

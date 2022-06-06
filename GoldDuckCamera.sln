@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32516.85
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoldDuckCamera.Server", "GoldDuckCamera\Server\GoldDuckCamera.Server.csproj", "{6E91E2BF-F299-4B8A-92E6-F2D0047E8A3F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoldDuckCamera.Client", "GoldDuckCamera\Client\GoldDuckCamera.Client.csproj", "{02D3C5C1-2CFD-4850-A814-DA7DD88D5C4D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoldDuckCamera.Shared", "GoldDuckCamera\Shared\GoldDuckCamera.Shared.csproj", "{1CBDDB88-B839-4454-9C12-8C7DA366445B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CF2829AA-6785-46DC-8834-980CFECDCD18}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E91E2BF-F299-4B8A-92E6-F2D0047E8A3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E91E2BF-F299-4B8A-92E6-F2D0047E8A3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E91E2BF-F299-4B8A-92E6-F2D0047E8A3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E91E2BF-F299-4B8A-92E6-F2D0047E8A3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02D3C5C1-2CFD-4850-A814-DA7DD88D5C4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02D3C5C1-2CFD-4850-A814-DA7DD88D5C4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02D3C5C1-2CFD-4850-A814-DA7DD88D5C4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02D3C5C1-2CFD-4850-A814-DA7DD88D5C4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CBDDB88-B839-4454-9C12-8C7DA366445B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CBDDB88-B839-4454-9C12-8C7DA366445B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CBDDB88-B839-4454-9C12-8C7DA366445B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CBDDB88-B839-4454-9C12-8C7DA366445B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {22568AD0-CDFA-49B8-A47E-B7EDA35EC1D3}
+	EndGlobalSection
+EndGlobal

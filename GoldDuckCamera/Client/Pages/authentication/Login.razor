@@ -1,0 +1,75 @@
+﻿@page "/login"
+
+@using Blazored.LocalStorage
+@using Microsoft.AspNetCore.Authorization
+@using GoldDuckCamera.Client.Services
+
+@inject IJSRuntime JsRuntime
+@inject IAuthService AuthService
+@inject NavigationManager Navigation
+@inject ILocalStorageService localStorage;
+@inject ApiAuthenticationStateProvider api;
+@inject HttpClient Http
+
+
+<PageTitle>Login</PageTitle>
+<div id="auth">
+    <div class="row h-100">
+        <div class="col-lg-3 col-12"></div>
+        <div class="col-lg-6 col-12">
+            <div id="auth-left">
+                <h3 class="auth-title">ĐĂNG NHẬP </h3>
+                <p class="auth-subtitle mb-5">Nhập thông tin của bạn để đăng nhập</p>
+                <form name="login-form" method="post" onsubmit="@login">
+                    <div class="form-group position-relative has-icon-left mb-4">
+                        <input id="user_name" type="text" @bind="@_login.UserName" name="user_name" class="form-control form-control-xl" placeholder="Tên đăng nhập">
+
+                        <div class="form-control-icon">
+                            <i class="bi bi-person"></i>
+                        </div>
+                    </div>
+                    <div class="form-group position-relative has-icon-left mb-4">
+                        <input id="password" type="password" @bind="@_login.Password" name="password" class="form-control form-control-xl" placeholder="Mật khẩu">
+
+                        <div class="form-control-icon">
+                            <i class="bi bi-shield-lock"></i>
+                        </div>
+                    </div>
+                    <button class="btn btn-login btn-primary btn-block btn-lg shadow-lg mt-5" type="submit">Đăng nhập</button>
+                </form>
+                <div class="text-center mt-5 text-lg fs-4">
+                    <p class="text-gray-600">
+                        Bạn chưa có tài khoản?
+                        <a href="register" class="font-bold">Đăng ký</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    LoginRequest _login = new LoginRequest();
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+
+    }
+    public async void login()
+    {
+        var result = await AuthService.Login(@_login);
+        if (result.Success)
+        {
+           
+    
+            await JsRuntime.InvokeVoidAsync("onLoad");
+        }
+        else
+        {
+            await JsRuntime.InvokeVoidAsync("alert", result.Error);
+        }
+
+    }
+}
